@@ -5,12 +5,7 @@
     <meta name="description" content="my first trial">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            padding: 5px;
-        }
-    </style>
+
 </head>
 <body>
 <h1>Please insert your info:</h1>
