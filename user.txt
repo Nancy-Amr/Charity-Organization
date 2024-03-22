@@ -1,0 +1,6 @@
+1~Nancy~01097563893~Nasr City~nancy@email.com
+2~Salma~01234532676~Tagamoa~Salam@email.com
+3~Menna~01554742599~ElMoatam~menna@email.com
+4~Menna Mohammed~01234256436~ElMoatam~mennaM@email.com
+5~Rana~01245367245~Nasr City~Rana@email.com
+6~Maged~01245367892~Helioplis~maged@email.com
