@@ -27,12 +27,13 @@
             </tr> 
         </div>
 
-
+      
 <?php
 include_once"Function.php";
 DrawTableFromFile("user.txt");
 ?>
 
 </table>
+<button onclick="location.href='UserForm.php';">Insert New User</button>
 </body>
 </html>
