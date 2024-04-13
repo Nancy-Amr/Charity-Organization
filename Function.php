@@ -34,16 +34,7 @@ function InsertUser()
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
-        $lastId = 0;
-        $file = fopen("user.txt", "r+") or die("Unable to open file!");
-        while (!feof($file)) {
-            $line = fgets($file);
-            $userInfo = explode("~", $line);
-            if (isset($userInfo[0]) && is_numeric($userInfo[0])) {
-                $lastId = intval($userInfo[0]);
-            }
-        }
-        fclose($file);
+        $lastId = getLastId("user.txt","~");
         $id = $lastId + 1;
         $userInfo = "$id~$username~$phone~$address~$email\n";
         $file = fopen("user.txt", "a+") or die("Unable to open file!");
@@ -54,7 +45,19 @@ function InsertUser()
     }
 }
 
-
+function getLastId($fileName,$separator){
+    $file = fopen("user.txt", "r+") or die("Unable to open file!");
+    $lastId = 0;
+    while (!feof($file)) {
+        $line = fgets($file);
+        $userInfo = explode($separator, $line);
+        if ($userInfo[0]!="") {
+            $lastId = $userInfo[0];
+        }
+    }
+    fclose($file);
+    return $lastId;
+}
 
 function handleUserEdit()
 {
