@@ -24,7 +24,8 @@
                     <td>Phone</td>
                     <td>Adrees</td>
                     <td>Email</td>
-                    <td>Action</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
             </tr> 
         </div>
 
