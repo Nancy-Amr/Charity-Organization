@@ -15,6 +15,7 @@ function DrawTableFromFile($filename)
             }
             if (isset($ArrayLine[0]) && !empty($ArrayLine[0])) {
                 echo "<td><a href='EditUserForm.php?action=edit&id={$ArrayLine[0]}'>Edit</a></td>";
+                echo "<td><a href='DeleteUserForm.php?action=delete&id={$ArrayLine[0]}'>Delete</a></td>";
             }
             echo "</tr>";
         }
@@ -83,6 +84,27 @@ function handleUserEdit()
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
 
+    }
+}
+
+
+function deleteUser($userId, $filename) {
+    // Read user data from file
+    $file = file($filename);
+
+    // Iterate over each line in the file
+    foreach ($file as $key => $line) {
+        $userData = explode("~", $line);
+        // Check if the ID matches
+        if ($userData[0] == $userId) {
+            // Remove the line corresponding to the user
+            #unset($file[$key]);
+            $file[$key] = "";
+            // Write updated user data back to file
+            file_put_contents($filename, implode("", $file));
+            
+        
+        }
     }
 }
 
