@@ -39,6 +39,7 @@ class User{
     public $Phone;
     Public $Address;
     public $Email;
+    public $Password;
     function __construct(){
         $this->mainobj=new Main();
         $this->mainobj->filename="user.txt";
@@ -52,6 +53,7 @@ class User{
     $this->Phone=$ArrayLine[2];
     $this->Address=$ArrayLine[3];
     $this->Email=$ArrayLine[4];
+    $this->Password=$ArrayLine[5];
     return $this;
 } 
 function DrawTableFromFile()
@@ -85,6 +87,7 @@ function handleUserEdit()
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
+        $password = $_POST["Password"];
 
         // Read user data from file
         $filename = $this->mainobj->filename;
@@ -97,7 +100,7 @@ function handleUserEdit()
             // Check if the ID matches
             if ($userData[0] == $id) {
                 // Update user data
-                $file[$key] = "$id~$username~$phone~$address~$email\n";
+                $file[$key] = "$id~$username~$phone~$address~$email~$password\n";
                 break;
             }
         }
@@ -138,6 +141,7 @@ function InsertUser()
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
+        $password = $_POST["Password"];
         $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
         $id = $lastId + 1;
         $DonationInfo = "$id~$username~$phone~$address~$email\n";
@@ -161,6 +165,7 @@ function InsertUser()
 // $user->Phone = $ArrayLine[2];
 // $user->Address = $ArrayLine[3];
 // $user->Email = $ArrayLine[4];
+   $user->Password = $ArrayLine[5];
 
 //     return $user;
 //         }
