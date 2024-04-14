@@ -45,5 +45,7 @@ for($i=0;$i<count($arr);$i++){
 <button onclick="location.href='AddDonationForm.php';">Insert New Donation</button><br>
 <button onclick="location.href='DonationDetails.php';">View All Donations details</button><br>
 <button onclick="location.href='user.php';">View Users</button>
+<br><button onclick="location.href='VolunteeringOppurtunity.php';">View Volunteering Oppurtunities</button>
+
 </body>
 </html>

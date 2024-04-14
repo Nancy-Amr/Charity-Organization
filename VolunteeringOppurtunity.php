@@ -54,5 +54,8 @@ for($i=0;$i<count($arr);$i++){
 
 </table>
 <button onclick="location.href='AddOppForm.php';">Insert New Oppertunity</button>
+<button onclick="location.href='Donation.php';">View Donations</button>
+<button onclick="location.href='user.php';">View Users</button>
+
 </body>
 </html>
