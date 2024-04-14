@@ -1,0 +1,6 @@
+109~General-manager
+36~Food-manager
+4~Even-planner
+57~Reciptionist
+45~Clothes-manager
+9~Volunteer
