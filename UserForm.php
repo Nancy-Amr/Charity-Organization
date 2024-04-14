@@ -15,6 +15,7 @@
             Address:<input type="text" name="Address"></td>
             Phone:<input type="text" name="Phone"></td>
             Email:<input type="text" name="Email"></td>
+            Password:<input type="text" name="Password"></td>
         </tr>
         <tr>
             <td colspan="5"><input type="submit" ></td>
