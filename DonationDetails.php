@@ -1,7 +1,7 @@
 <?php
 include_once"Function.php";
 $obj=new DonationDetails();
-$user=$obj->getDonationDetById($_GET["Id"]);
+$don=$obj->getDonationDetById($_GET["Id"]);
 ?>
 
 <!DOCTYPE html>

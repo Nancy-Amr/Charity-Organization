@@ -240,9 +240,11 @@ class Donation{
         $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
     while (!feof($file)) {
         $line = fgets($file);
+        if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
        $arr[$i]=$this->getDonationById($ArrayLine[0]);
        $i++;
+        }
     }
     fclose($file);
     return $arr;
@@ -337,9 +339,11 @@ class DonationDetails{
         $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
     while (!feof($file)) {
         $line = fgets($file);
+        if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
        $arr[$i]=$this->getDonationDetById($ArrayLine[0]);
        $i++;
+        }
     }
     fclose($file);
     return $arr;
@@ -356,7 +360,7 @@ class DonationDetails{
         $rating = $_POST["Rating"];
         $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
         $id = $lastId + 1;
-        $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$rating\n";
+        $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $DonationInfo);
         fclose($file);
