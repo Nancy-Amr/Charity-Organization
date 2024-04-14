@@ -406,5 +406,104 @@ function deleteDonation($Id, $filename) {
 }
 
 
+class UserType{
+    public $type;
+   
+    public $id;
+   
+    public $UTmainobj;
+
+    function __construct(){
+        $this->UTmainobj=new Main();
+        $this->UTmainobj->filename="userT.txt";
+        $this->UTmainobj->separator="~";
+    }
+
+    function gettypebyID($Id){
+        $line=$this->UTmainobj->getLineWithId($Id,$this->UTmainobj->filename,$this->UTmainobj->separator);
+        $ArrayLine = explode($this->UTmainobj->separator, $line);
+        $Utype= new UserType();
+        $Utype->id = $ArrayLine[0];
+        $Utype->type = $ArrayLine[1];
+        
+        return $Utype;
+    } 
+    function ListallUtypes(){
+        $arr=[];
+        $i=0;
+        $file = fopen($this->UTmainobj->filename, "r+") or die("Unable to open file!");
+    while (!feof($file)) {
+        $line = fgets($file);
+        $ArrayLine = explode($this->UTmainobj->separator, $line);
+       $arr[$i]=$this->gettypebyID($ArrayLine[0]);
+       $i++;
+    }
+    fclose($file);
+    return $arr;
+    }
+    function InsertType()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $type = $_POST["type"];
+        $lastId = $this->UTmainobj->getLastId($this->UTmainobj->filename,"~");
+        $id = $lastId + 1;
+        $typeinfo = "$id~$type\n";
+        $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
+        fwrite($file, $typeinfo);
+        fclose($file);
+
+        // $obj=new UserType();
+        // $obj->InsertType($id,$type);
+        exit();
+       
+    }
+}
+function handleTypeEdit()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $type= $_POST["type"];
+        $filename = $this->UTmainobj->filename;
+        $file = file($filename);
+
+
+        // Iterate over each line in the file
+        foreach ($file as $key => $line) {
+            $Types = explode("~", $line);
+            if ($Types[0] == $id) {
+                $file[$key] = "$id~$type\n";
+                break;
+            }
+        }
+
+        // Write updated user data back to file
+        file_put_contents($filename, implode("", $file));
+        $obj=new UserType();
+        $obj->handleTypeEdit($id,$type);
+    }
+}
+
+function deleteType($id, $filename) {
+    // Read user data from file
+    $file = file($filename);
+
+    // Iterate over each line in the file
+    foreach ($file as $key => $line) {
+        $type = explode("~", $line);
+        // Check if the ID matches
+        if ($type[0] == $id) {
+            // Remove the line corresponding to the user
+            #unset($file[$key]);
+            $file[$key] = "";
+            // Write updated user data back to file
+            file_put_contents($filename, implode("", $file));
+            
+        
+        }
+    }
+}
+}
+
 
 ?>
