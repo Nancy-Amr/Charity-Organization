@@ -31,6 +31,7 @@ $user=$obj->getDonationDetById($_GET["Id"]);
                     <td>Recipient ID</td>
                     <td>Donor Info</td>
                     <td>feedback</td> 
+                    <td>Rating</td> 
                     <!-- <td>type</td> -->
             </tr> 
         </div>
@@ -41,7 +42,7 @@ $user=$obj->getDonationDetById($_GET["Id"]);
 $arr=[];
 $arr=$obj->ListallDonationDetails();
 for($i=0;$i<count($arr);$i++){
-    echo"<tr><td>".$arr[$i]->Id."</td><td>".$arr[$i]->date."</td><td>".$arr[$i]->time."</td><td>".$arr[$i]->recipient."</td><td><a href=UserController.php?DonId=".$arr[$i]->Id.">".$arr[$i]->DonorId."</a></td><td>".$arr[$i]->feedback."</td></tr>";
+    echo"<tr><td>".$arr[$i]->Id."</td><td>".$arr[$i]->date."</td><td>".$arr[$i]->time."</td><td>".$arr[$i]->recipient."</td><td><a href=UserController.php?DonId=".$arr[$i]->Id.">".$arr[$i]->DonorId."</a></td><td>".$arr[$i]->feedback."</td><td>".$arr[$i]->Rating."</td></tr>";
 }
 //"</td><td>".$arr[$i]->recipient."</td><td><a href=UserController.php?DonId=".$arr[$i]->Id.">".$arr[$i]->DonorId."</a>"</td><td>".$arr[$i]->feedback."</td></tr>";
 ?>

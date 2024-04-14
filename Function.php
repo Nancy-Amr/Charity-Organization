@@ -95,6 +95,8 @@ function deleteUser($userId, $filename) {
         }
     }
 }
+
+
 class Main{
     public $filename;
     public $separator;
@@ -274,8 +276,28 @@ class Donation{
         header("Location:Donation.php");
         exit();
     }
+    function handleDonationEdit($id,$date)
+{
+   
+        $filename = $this->mainobj->filename;
+        $file = file($filename);
+
+
+        // Iterate over each line in the file
+        foreach ($file as $key => $line) {
+            $DonationData = explode("~", $line);
+            if ($DonationData[0] == $id) {
+                $file[$key] = "$id~$date~\n";
+                break;
+            }
+        }
+
+        // Write updated user data back to file
+        file_put_contents($filename, implode("", $file));
+    }
+
 }
-    
+
     
 
 class DonationDetails{
@@ -287,7 +309,7 @@ class DonationDetails{
     public $recipient;
     public $DonorId;
     public $time;
-    public $qualityOfService;
+    public $Rating;
     public $mainobj;
     
     function __construct(){
@@ -305,7 +327,7 @@ class DonationDetails{
         $donation->DonorId = $ArrayLine[3];
         $donation->feedback = $ArrayLine[4];
         $donation->time = $ArrayLine[5];
-        $donation->qualityOfService = $ArrayLine[6];
+        $donation->Rating = $ArrayLine[6];
         
         return $donation;
     } 
@@ -331,9 +353,10 @@ class DonationDetails{
         $RecipientId = $_POST["RecipientId"];
         $time = date("h:i:sa");
         $feedback = $_POST["Feedback"];
+        $rating = $_POST["Rating"];
         $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
         $id = $lastId + 1;
-        $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time\n";
+        $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$rating\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $DonationInfo);
         fclose($file);
@@ -352,6 +375,7 @@ function handleDonationEdit()
         $RecipientId = $_POST["RecipientId"];
         $time = date("h:i:sa");
         $feedback = $_POST["Feedback"];
+        $feedback = $_POST["Rating"];
         // Read user data from file
         $filename = $this->mainobj->filename;
         $file = file($filename);
@@ -361,7 +385,7 @@ function handleDonationEdit()
         foreach ($file as $key => $line) {
             $DonationData = explode("~", $line);
             if ($DonationData[0] == $id) {
-                $file[$key] = "$id~$date~$RecipientId~$donorId~$feedback~$time\n";
+                $file[$key] = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating\n";
                 break;
             }
         }

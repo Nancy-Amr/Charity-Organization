@@ -30,15 +30,16 @@
                 $DonationData = explode("~", $line);
 
                 if (!empty($DonationData) && $DonationData[0] == $DonationId) {
-                    list($id,$Date, $RecipientId, $DonorId, $Feedback,$time) = $DonationData;
+                    list($id,$Date, $RecipientId, $DonorId, $feedback,$time,$rating) = $DonationData;
     ?>
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                        <input type="hidden" name="id" value="<?php echo obj->$id; ?>">
-                        DonorId: <input type="text" name="DonorId" value="<?php echo $obj->$DonorId; ?>"><br>
-                        Date: <input type="text" name="Date" value="<?php echo $obj->$Date; ?>"><br>
-                        RecipientId: <input type="text" name="RecipientId" value="<?php echo $obj->$RecipientId; ?>"><br>
-                        Feedback: <input type="text" name="Feedback" value="<?php echo $obj->$Feedback; ?>"><br>
-                        <input type="hidden" name="time" value="<?php echo obj->$time; ?>">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        DonorId: <input type="text" name="DonorId" value="<?php echo $DonorId; ?>"><br>
+                        Date: <input type="text" name="Date" value="<?php echo $Date; ?>"><br>
+                        RecipientId: <input type="text" name="RecipientId" value="<?php echo $RecipientId; ?>"><br>
+                        Feedback: <input type="text" name="Feedback" value="<?php echo $feedback; ?>"><br>
+                        Rating: <input type="text" name="Rating" value="<?php echo $rating; ?>"><br>
+                        <input type="hidden" name="time" value="<?php echo $time; ?>">
                         <input type="submit" name="edit" value="Save Changes">
                     </form>
     <?php
