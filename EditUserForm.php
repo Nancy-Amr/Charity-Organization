@@ -38,6 +38,7 @@
                         Phone: <input type="text" name="Phone" value="<?php echo $phone; ?>"><br>
                         Address: <input type="text" name="Address" value="<?php echo $address; ?>"><br>
                         Email: <input type="text" name="Email" value="<?php echo $email; ?>"><br>
+                        Password: <input type="text" name="Password" value="<?php echo $password; ?>"><br>
                         <input type="submit" name="edit" value="Save Changes">
                     </form>
     <?php
