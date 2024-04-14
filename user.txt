@@ -1,8 +1,6 @@
-1~Nancy~01097563893~Nasr City~nancy@email.com
-2~Salma~01234532676~Tagamoa~Salam@email.com
-3~Menna~01554742599~ElMoatam~menna@email.com
-4~Menna Mohammed~01234256436~ElMoatam~mennaM@email.com
-5~Rana~01245367245~Nasr City~Rana@email.com
-6~Maged~01245367892~Helioplis~maged@email.com
-7~farah~0122334455~sheraton~farah@email.com
-8~ahmed~011020803~6 october~ahmed@email.com
+1~Nancy amr~0109756354~Nasr~admin@email.com~0000
+2~Salma~01234532676~Tagamoa~Salam@email.com~0000
+3~Menna~01554742599~ElMoatam~admin@email.com~0001
+4~Menna Mohamed~01234256436~ElMoatam~mennaM@email.com~0000
+5~Rana~01245367245~Nasr City~Rana@email.com~0000
+6~Maged~01245367892~Helioplis~maged@email.com~0000
