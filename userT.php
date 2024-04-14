@@ -38,12 +38,14 @@ $obj=new UserType();
 $arr=[];
 $arr=$obj->ListallUtypes();
 for($i=0;$i<count($arr);$i++){
-    echo"<tr><td><a href=DonationDetailsContr.php?Id=".$arr[$i]->id.">".$arr[$i]->id."</a></td><td>".$arr[$i]->type."</td>";
-    if (isset($arr[$i]->id) && !empty($arr[$i]->id)) {
-        echo "<td><a href='EditDonationForm.php?action=edit&id={$arr[$i]->id}'>Edit</a></td>";
-        echo "<td><a href='DeleteTypeForm.php?action=delete&id={$arr[$i]->id}'>Delete</a></td>";
-    }
-    echo "</tr>";
+  //echo"<tr><td>".$arr[$i]->id."</a></td><td>".$arr[$i]->type."</td>";
+  echo "<tr><td>" . ($arr[$i]->id ?? '') . "</td><td>" . ($arr[$i]->type ?? '') . "</td>";
+
+  if (isset($arr[$i]->id) && !empty($arr[$i]->id)) {
+      echo "<td><a href='EditTypeForm.php?action=edit&id={$arr[$i]->id}'>Edit</a></td>";
+      echo "<td><a href='DeleteTypeForm.php?action=delete&id={$arr[$i]->id}'>Delete</a></td>";
+  }
+  echo "</tr>";
 }
 ?>
 
