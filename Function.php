@@ -419,15 +419,40 @@ class UserType{
         $this->UTmainobj->separator="~";
     }
 
-    function gettypebyID($Id){
-        $line=$this->UTmainobj->getLineWithId($Id,$this->UTmainobj->filename,$this->UTmainobj->separator);
+    // function gettypebyID($id){
+    //     $line=$this->UTmainobj->getLineWithId($id,$this->UTmainobj->filename,$this->UTmainobj->separator);
+    //     $ArrayLine = explode($this->UTmainobj->separator, $line);
+    //     $Utype= new UserType();
+    //     $Utype->id = $ArrayLine[0];
+    //     $Utype->type = $ArrayLine[1];
+        
+    //     return $Utype;
+    // } 
+
+    function gettypebyID($id){
+        $line = $this->UTmainobj->getLineWithId($id, $this->UTmainobj->filename, $this->UTmainobj->separator);
+        
+        // Check if data is retrieved successfully
+        if (empty($line)) {
+            // Handle the case where no data is found for the ID
+            return null;
+        }
+        
         $ArrayLine = explode($this->UTmainobj->separator, $line);
-        $Utype= new UserType();
+      
+        // Check if there are at least 2 elements in the array before accessing them
+        if (count($ArrayLine) < 2) {
+            // Handle the case where the data has less elements than expected
+            return null;
+        }
+      
+        $Utype = new UserType();
         $Utype->id = $ArrayLine[0];
         $Utype->type = $ArrayLine[1];
         
         return $Utype;
-    } 
+      }
+      
     function ListallUtypes(){
         $arr=[];
         $i=0;
@@ -447,7 +472,7 @@ class UserType{
         $id = $_POST["id"];
         $type = $_POST["type"];
         $lastId = $this->UTmainobj->getLastId($this->UTmainobj->filename,"~");
-        $id = $lastId + 1;
+        //$Id = $lastId + 1;
         $typeinfo = "$id~$type\n";
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $typeinfo);
@@ -504,6 +529,5 @@ function deleteType($id, $filename) {
     }
 }
 }
-
 
 ?>
