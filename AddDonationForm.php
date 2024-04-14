@@ -8,13 +8,13 @@
 
 </head>
 <body>
-<h1>Please insert your info:</h1>
+<h1>Please insert donation info:</h1>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <tr>
-            Username:<input type="text" name="Username"></td>
-            Address:<input type="text" name="Address"></td>
-            Phone:<input type="text" name="Phone"></td>
-            Email:<input type="text" name="Email"></td>
+            DonorId:<input type="text" name="DonorId"></td>
+            Date:<input type="text" name="Date"></td>
+            RecipientId:<input type="text" name="RecipientId"></td>
+            Feedback (if you would like to provide one!):<input type="text" name="Feedback"></td>
         </tr>
         <tr>
             <td colspan="5"><input type="submit" ></td>
@@ -23,8 +23,9 @@
    
     <?php
 include_once"Function.php";
-$obj = new User();
-$obj->InsertUser();
+$obj = new DonationDetails();
+$obj->InsertDonation();
+       
 ?>
 </table>
 </body>
