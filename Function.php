@@ -1,101 +1,5 @@
 <?php
 
-function DrawTableFromFile($filename)
-{
-    $myfile = fopen($filename, "r+") or die("unable to open file!");
-    while (!feof($myfile)) {
-
-        $line = fgets($myfile);
-        if (!empty(trim($line))) {  //skip empty line
-            echo "<tr>";
-            $ArrayLine = explode("~", $line);
-
-            for ($i = 0; $i < count($ArrayLine); $i++) {
-                echo "<td>" . $ArrayLine[$i] . "</td>";
-            }
-            if (isset($ArrayLine[0]) && !empty($ArrayLine[0])) {
-                echo "<td><a href='EditUserForm.php?action=edit&id={$ArrayLine[0]}'>Edit</a></td>";
-                echo "<td><a href='DeleteUserForm.php?action=delete&id={$ArrayLine[0]}'>Delete</a></td>";
-            }
-            echo "</tr>";
-        }
-    }
-    fclose($myfile);
-
-}
-
-
-
-
-function getLastId($fileName,$separator){
-    if(!file_exists($fileName)){return 0;}
-    $file = fopen("user.txt", "r+") or die("Unable to open file!");
-    $lastId = 0;
-    while (!feof($file)) {
-        $line = fgets($file);
-        $userInfo = explode($separator, $line);
-        if ($userInfo[0]!="") {
-            $lastId = $userInfo[0];
-        }
-    }
-    fclose($file);
-    return $lastId;
-}
-
-
-
-function handleUserEdit()
-{
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $username = $_POST["Username"];
-        $phone = $_POST["Phone"];
-        $address = $_POST["Address"];
-        $email = $_POST["Email"];
-
-        // Read user data from file
-        $filename = "user.txt";
-        $file = file($filename);
-
-
-        // Iterate over each line in the file
-        foreach ($file as $key => $line) {
-            $userData = explode("~", $line);
-            // Check if the ID matches
-            if ($userData[0] == $id) {
-                // Update user data
-                $file[$key] = "$id~$username~$phone~$address~$email\n";
-                break;
-            }
-        }
-
-        // Write updated user data back to file
-        file_put_contents($filename, implode("", $file));
-
-    }
-}
-
-
-function deleteUser($userId, $filename) {
-    // Read user data from file
-    $file = file($filename);
-
-    // Iterate over each line in the file
-    foreach ($file as $key => $line) {
-        $userData = explode("~", $line);
-        // Check if the ID matches
-        if ($userData[0] == $userId) {
-            // Remove the line corresponding to the user
-            #unset($file[$key]);
-            $file[$key] = "";
-            // Write updated user data back to file
-            file_put_contents($filename, implode("", $file));
-            
-        
-        }
-    }
-}
-
 
 class Main{
     public $filename;
@@ -150,6 +54,82 @@ class User{
     $this->Email=$ArrayLine[4];
     return $this;
 } 
+function DrawTableFromFile()
+{
+    $myfile = fopen($this->mainobj->filename, "r+") or die("unable to open file!");
+    while (!feof($myfile)) {
+
+        $line = fgets($myfile);
+        if (!empty(trim($line))) {  //skip empty line
+            echo "<tr>";
+            $ArrayLine = explode($this->mainobj->separator, $line);
+
+            for ($i = 0; $i < count($ArrayLine); $i++) {
+                echo "<td>" . $ArrayLine[$i] . "</td>";
+            }
+            if (isset($ArrayLine[0]) && !empty($ArrayLine[0])) {
+                echo "<td><a href='EditUserForm.php?action=edit&id={$ArrayLine[0]}'>Edit</a></td>";
+                echo "<td><a href='DeleteUserForm.php?action=delete&id={$ArrayLine[0]}'>Delete</a></td>";
+            }
+            echo "</tr>";
+        }
+    }
+    fclose($myfile);
+
+}
+function handleUserEdit()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $username = $_POST["Username"];
+        $phone = $_POST["Phone"];
+        $address = $_POST["Address"];
+        $email = $_POST["Email"];
+
+        // Read user data from file
+        $filename = $this->mainobj->filename;
+        $file = file($filename);
+
+
+        // Iterate over each line in the file
+        foreach ($file as $key => $line) {
+            $userData = explode($this->mainobj->separator, $line);
+            // Check if the ID matches
+            if ($userData[0] == $id) {
+                // Update user data
+                $file[$key] = "$id~$username~$phone~$address~$email\n";
+                break;
+            }
+        }
+
+        // Write updated user data back to file
+        file_put_contents($filename, implode("", $file));
+
+    }
+}
+
+
+function deleteUser($userId) {
+    $filename = $this->mainobj->filename;
+    // Read user data from file
+    $file = file($filename);
+
+    // Iterate over each line in the file
+    foreach ($file as $key => $line) {
+        $userData = explode($this->mainobj->separator, $line);
+        // Check if the ID matches
+        if ($userData[0] == $userId) {
+            // Remove the line corresponding to the user
+            #unset($file[$key]);
+            $file[$key] = "";
+            // Write updated user data back to file
+            file_put_contents($filename, implode("", $file));
+            
+        
+        }
+    }
+}
+
 function InsertUser()
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -158,7 +138,7 @@ function InsertUser()
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
-        $lastId = getLastId($this->mainobj->filename,"~");
+        $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
         $id = $lastId + 1;
         $DonationInfo = "$id~$username~$phone~$address~$email\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
@@ -357,8 +337,8 @@ class DonationDetails{
         $RecipientId = $_POST["RecipientId"];
         $time = date("h:i:sa");
         $feedback = $_POST["Feedback"];
-        $rating = $_POST["Rating"];
-        $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
+        $Rating = $_POST["Rating"];
+        $lastId = $this->mainobj->getLastId($this->mainobj->filename,$this->mainobj->separator);
         $id = $lastId + 1;
         $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
@@ -379,7 +359,7 @@ function handleDonationEdit()
         $RecipientId = $_POST["RecipientId"];
         $time = date("h:i:sa");
         $feedback = $_POST["Feedback"];
-        $feedback = $_POST["Rating"];
+        $Rating = $_POST["Rating"];
         // Read user data from file
         $filename = $this->mainobj->filename;
         $file = file($filename);

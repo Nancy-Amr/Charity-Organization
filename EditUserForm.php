@@ -8,11 +8,11 @@
     <h2>Edit User Information</h2>
     <?php
     include_once "Function.php";
-
+    $obj=new User();
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Call function to handle user edit
-        handleUserEdit();
+       $obj-> handleUserEdit();
         
         // Redirect to user page after editing
         header("Location: user.php");
@@ -21,13 +21,13 @@
         // Retrieve user data if ID is provided
         if (isset($_GET['id']) && $_GET['id'] !== '') {
             $userId = $_GET['id'];
-            $filename = "user.txt";
+            $filename = $obj->mainobj->filename;
             $file = fopen($filename, "r") or die("Unable to open file!");
 
             // Iterate through each line in the file
             while (!feof($file)) {
                 $line = fgets($file);
-                $userData = explode("~", $line);
+                $userData = explode($obj->mainobj->separator, $line);
 
                 if (!empty($userData) && $userData[0] == $userId) {
                     list($id, $username, $phone, $address, $email) = $userData;

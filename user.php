@@ -32,7 +32,8 @@
       
 <?php
 include_once"Function.php";
-DrawTableFromFile("user.txt");
+$obj = new User();
+$obj->DrawTableFromFile();
 ?>
 
 </table>

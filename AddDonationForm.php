@@ -48,17 +48,16 @@
             <tr>
                 <td>Rating:</td>
                 <td>
-                    <!-- Star rating input -->
                     <div class="rating">
-                        <input type="radio" id="star5" name="Rating" value="5" />
+                        <input type="radio" id="star5" name="Rating" value="5 stars" />
                         <label for="star5">☆</label>
-                        <input type="radio" id="star4" name="Rating" value="4" />
+                        <input type="radio" id="star4" name="Rating" value="4 stars" />
                         <label for="star4">☆</label>
-                        <input type="radio" id="star3" name="Rating" value="3" />
+                        <input type="radio" id="star3" name="Rating" value="3 stars" />
                         <label for="star3">☆</label>
-                        <input type="radio" id="star2" name="Rating" value="2" />
+                        <input type="radio" id="star2" name="Rating" value="2 stars" />
                         <label for="star2">☆</label>
-                        <input type="radio" id="star1" name="Rating" value="1" />
+                        <input type="radio" id="star1" name="Rating" value="1 stars" />
                         <label for="star1">☆</label>
                     </div>
                 </td>
