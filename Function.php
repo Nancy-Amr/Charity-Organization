@@ -165,7 +165,7 @@ function InsertUser()
 // $user->Phone = $ArrayLine[2];
 // $user->Address = $ArrayLine[3];
 // $user->Email = $ArrayLine[4];
-   $user->Password = $ArrayLine[5];
+ //  $user->Password = $ArrayLine[5];
 
 //     return $user;
 //         }
