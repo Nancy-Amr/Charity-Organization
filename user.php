@@ -24,6 +24,7 @@
                     <td>Phone</td>
                     <td>Adrees</td>
                     <td>Email</td>
+                    <td>Password</td>
                     <td>Edit</td>
                     <td>Delete</td>
             </tr> 
