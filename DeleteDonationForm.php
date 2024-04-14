@@ -9,7 +9,7 @@ if (isset($_GET['id']) && $_GET['id'] !== '') {
     // Call a function to handle user deletion
     $obj->deleteDonation($DonationIdToDelete, $obj->mainobj->filename);
     // Redirect back to the user.php page after deletion
-    header("Location: Donation.php");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit(); // Ensure no further code execution after redirection
 }
 

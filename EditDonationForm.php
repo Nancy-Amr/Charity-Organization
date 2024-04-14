@@ -9,22 +9,17 @@
     <?php
     include_once "Function.php";
     $obj=new DonationDetails();
-    // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Call function to handle user edit
         $obj->handleDonationEdit();
         
-        // Redirect to user page after editing
         header("Location: Donation.php");
         exit();
     } else {
-        // Retrieve user data if ID is provided
         if (isset($_GET['id']) && $_GET['id'] !== '') {
             $DonationId = $_GET['id'];
             $filename = $obj->mainobj->filename;
             $file = fopen($filename, "r") or die("Unable to open file!");
 
-            // Iterate through each line in the file
             while (!feof($file)) {
                 $line = fgets($file);
                 $DonationData = explode("~", $line);

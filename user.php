@@ -38,5 +38,7 @@ $obj->DrawTableFromFile();
 
 </table>
 <button onclick="location.href='UserForm.php';">Insert New User</button>
+<button onclick="location.href='userT.php';">View User types</button>
+<br><button onclick="location.href='Donation.php';">View Donations</button>
 </body>
 </html>

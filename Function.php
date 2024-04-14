@@ -301,6 +301,7 @@ class DonationDetails{
     }
    function getDonationDetById($Id){
         $line=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
+        if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
         $donation= new DonationDetails();
         $donation->Id = $ArrayLine[0];
@@ -312,6 +313,7 @@ class DonationDetails{
         $donation->Rating = $ArrayLine[6];
         
         return $donation;
+        }
     } 
     function ListallDonationDetails(){
         $arr=[];

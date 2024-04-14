@@ -31,7 +31,7 @@ $obj=new Donation();
 $arr=[];
 $arr=$obj->ListallDonations();
 for($i=0;$i<count($arr);$i++){
-    echo"<tr><td><a href=DonationDetails.php?Id=".$arr[$i]->Id.">".$arr[$i]->Id."</a></td><td>".$arr[$i]->date."</td>";
+    echo"<tr><td><a href=DonationDetailsController.php?Id=".$arr[$i]->Id.">".$arr[$i]->Id."</a></td><td>".$arr[$i]->date."</td>";
     if (isset($arr[$i]->Id) && !empty($arr[$i]->Id)) {
         echo "<td><a href='EditDonationForm.php?action=edit&id={$arr[$i]->Id}'>Edit</a></td>";
         echo "<td><a href='DeleteDonationForm.php?action=delete&id={$arr[$i]->Id}'>Delete</a></td>";
@@ -42,6 +42,8 @@ for($i=0;$i<count($arr);$i++){
 ?>
 
 </table>
-<button onclick="location.href='AddDonationForm.php';">Insert New Donation</button>
+<button onclick="location.href='AddDonationForm.php';">Insert New Donation</button><br>
+<button onclick="location.href='DonationDetails.php';">View All Donations details</button><br>
+<button onclick="location.href='user.php';">View Users</button>
 </body>
 </html>

@@ -52,5 +52,7 @@ for($i=0;$i<count($arr);$i++){
 
 </table>
 <button onclick="location.href='UserTypeForm.php';">Insert New User Type</button>
+<button onclick="location.href='user.php';">View Users</button>
+
 </body>
 </html>
