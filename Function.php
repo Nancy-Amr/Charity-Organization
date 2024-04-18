@@ -59,13 +59,15 @@ class User{
 function DrawTableFromFile()
 {
     $myfile = fopen($this->mainobj->filename, "r+") or die("unable to open file!");
+    $obj=new UserType();
     while (!feof($myfile)) {
 
         $line = fgets($myfile);
         if (!empty(trim($line))) {  //skip empty line
             echo "<tr>";
             $ArrayLine = explode($this->mainobj->separator, $line);
-
+            
+            $type=$obj->gettypebyID($_GET["Id"]);
             for ($i = 0; $i < count($ArrayLine); $i++) {
                 echo "<td>" . $ArrayLine[$i] . "</td>";
             }
@@ -73,6 +75,7 @@ function DrawTableFromFile()
                 echo "<td><a href='EditUserForm.php?action=edit&id={$ArrayLine[0]}'>Edit</a></td>";
                 echo "<td><a href='DeleteUserForm.php?action=delete&id={$ArrayLine[0]}'>Delete</a></td>";
             }
+                echo"<td>".$type->$type."</td>";
             echo "</tr>";
         }
     }

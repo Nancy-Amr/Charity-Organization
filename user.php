@@ -27,6 +27,7 @@
                     <td>Password</td>
                     <td>Edit</td>
                     <td>Delete</td>
+                    <td>Type</td>
             </tr> 
         </div>
 
