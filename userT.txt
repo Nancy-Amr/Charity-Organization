@@ -1,6 +1,14 @@
 109~General-manager
 36~Food-manager
-4~Even-planner
+14~Even-planner
 57~Reciptionist
 45~Clothes-manager
 9~Volunteer
+1~Donor
+2~Donor
+3~Donor
+4~Donor
+5~Donor
+6~Volunteer
+7~Donor
+8~Donor

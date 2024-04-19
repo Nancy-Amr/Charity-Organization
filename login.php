@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if($flag){
-        if (substr($id, 0, 2) === "11") {
+        if ($userData[4] == "admin@email.com") {
             header("Location: admin.php?Username=" . urlencode($userData[1]));
             exit(); 
         } else {

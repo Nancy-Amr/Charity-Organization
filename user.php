@@ -25,9 +25,9 @@
                     <td>Adrees</td>
                     <td>Email</td>
                     <td>Password</td>
+                    <td>Type</td>
                     <td>Edit</td>
                     <td>Delete</td>
-                    <td>Type</td>
             </tr> 
         </div>
 

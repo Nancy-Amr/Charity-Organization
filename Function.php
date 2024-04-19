@@ -66,16 +66,16 @@ function DrawTableFromFile()
         if (!empty(trim($line))) {  //skip empty line
             echo "<tr>";
             $ArrayLine = explode($this->mainobj->separator, $line);
-            
-            $type=$obj->gettypebyID($_GET["Id"]);
+            $type=$obj->gettypebyID($ArrayLine[0]);
             for ($i = 0; $i < count($ArrayLine); $i++) {
                 echo "<td>" . $ArrayLine[$i] . "</td>";
             }
+            echo"<td>".$type->type."</td>";
             if (isset($ArrayLine[0]) && !empty($ArrayLine[0])) {
                 echo "<td><a href='EditUserForm.php?action=edit&id={$ArrayLine[0]}'>Edit</a></td>";
                 echo "<td><a href='DeleteUserForm.php?action=delete&id={$ArrayLine[0]}'>Delete</a></td>";
             }
-                echo"<td>".$type->$type."</td>";
+                
             echo "</tr>";
         }
     }
