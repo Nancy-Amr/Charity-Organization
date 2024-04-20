@@ -12,8 +12,16 @@
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <tr>
             Type:<input type="text" name="type"></td><br>
-            ID:<input type="text" name="id"></td><br>
-           
+            <input type="hidden" name="id" value="<?php  echo $_GET['Id']; ?>">
+            <?php
+            if($_GET){
+                echo $_GET['Id']; 
+            }else{
+              echo "Url has no id";
+            }
+            ?></td><br>
+                       <!-- ID:<input type="text" name="id"></td><br> -->
+
         </tr>
         <tr>
             <td colspan="2"><input type="submit" ></td>

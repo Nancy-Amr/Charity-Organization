@@ -9,6 +9,7 @@
     <?php
     include_once "Function.php";
     $obj=new User();
+    $userT=new UserType();
     // Check if form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Call function to handle user edit
@@ -30,8 +31,9 @@
                 $userData = explode($obj->mainobj->separator, $line);
 
                 if (!empty($userData) && $userData[0] == $userId) {
-                    list($id, $username, $phone, $address, $email) = $userData;
-    ?>
+                    list($id, $username, $phone, $address, $email,$password) = $userData;
+                    $type=$userT->gettypebyID($userData[0]);
+    ?>             
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                         Username: <input type="text" name="Username" value="<?php echo $username; ?>"><br>
@@ -39,6 +41,7 @@
                         Address: <input type="text" name="Address" value="<?php echo $address; ?>"><br>
                         Email: <input type="text" name="Email" value="<?php echo $email; ?>"><br>
                         Password: <input type="text" name="Password" value="<?php echo $password; ?>"><br>
+                        <?php echo "Type:  "."  <a href='EditTypeForm.php?action=edit&id={$type->id}'>$type->type</a>";?><br>
                         <input type="submit" name="edit" value="Save Changes">
                     </form>
     <?php

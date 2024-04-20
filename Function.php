@@ -147,11 +147,11 @@ function InsertUser()
         $password = $_POST["Password"];
         $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
         $id = $lastId + 1;
-        $DonationInfo = "$id~$username~$phone~$address~$email\n";
+        $UserInfo = "$id~$username~$phone~$address~$email~$password\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
-        fwrite($file, $DonationInfo);
+        fwrite($file, $UserInfo);
         fclose($file);
-        header("Location:user.php");
+        header("Location:userTypeForm.php? Id= $id");
         exit();
     }
 }
@@ -469,9 +469,11 @@ class UserType{
         $file = fopen($this->UTmainobj->filename, "r+") or die("Unable to open file!");
     while (!feof($file)) {
         $line = fgets($file);
+        if (!empty(trim($line))) {
         $ArrayLine = explode($this->UTmainobj->separator, $line);
        $arr[$i]=$this->gettypebyID($ArrayLine[0]);
        $i++;
+        }
     }
     fclose($file);
     return $arr;
@@ -487,7 +489,7 @@ class UserType{
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $typeinfo);
         fclose($file);
-        header("Location:userT.php");
+        header("Location:user.php");
 
         // $obj=new UserType();
         // $obj->InsertType($id,$type);
