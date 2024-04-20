@@ -275,7 +275,7 @@ class Donation{
 
         // Iterate over each line in the file
         foreach ($file as $key => $line) {
-            $DonationData = explode("~", $line);
+            $DonationData = explode($this->mainobj->separator, $line);
             if ($DonationData[0] == $id) {
                 $file[$key] = "$id~$date~\n";
                 break;
@@ -300,6 +300,7 @@ class DonationDetails{
     public $DonorId;
     public $time;
     public $Rating;
+    public $TypeId;
     public $mainobj;
     
     function __construct(){
@@ -319,6 +320,7 @@ class DonationDetails{
         $donation->feedback = $ArrayLine[4];
         $donation->time = $ArrayLine[5];
         $donation->Rating = $ArrayLine[6];
+        $donation->TypeId = $ArrayLine[7];
         
         return $donation;
         }
@@ -347,10 +349,11 @@ class DonationDetails{
         $RecipientId = $_POST["RecipientId"];
         $time = date("h:i:sa");
         $feedback = $_POST["Feedback"];
+        $TypeId = $_POST["DonationTypeId"];
         $Rating = $_POST["Rating"];
         $lastId = $this->mainobj->getLastId($this->mainobj->filename,$this->mainobj->separator);
         $id = $lastId + 1;
-        $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating\n";
+        $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating~$TypeId\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $DonationInfo);
         fclose($file);
@@ -369,6 +372,7 @@ function handleDonationEdit()
         $RecipientId = $_POST["RecipientId"];
         $time = date("h:i:sa");
         $feedback = $_POST["Feedback"];
+        $TypeId = $_POST["DonationTypeId"];
         $Rating = $_POST["Rating"];
         // Read user data from file
         $filename = $this->mainobj->filename;
@@ -377,9 +381,9 @@ function handleDonationEdit()
 
         // Iterate over each line in the file
         foreach ($file as $key => $line) {
-            $DonationData = explode("~", $line);
+            $DonationData = explode($this->mainobj->separator, $line);
             if ($DonationData[0] == $id) {
-                $file[$key] = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating\n";
+                $file[$key] = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating~$TypeId\n";
                 break;
             }
         }
@@ -749,6 +753,103 @@ function deleteOpp($Id, $filename) {
     }
     $obj=new VolunteeringOppurtunity();
     $obj->deleteOpp($Id, $obj->EXmainobj->filename);*/
+}
+}
+
+Class DonationType{
+    public $type;
+    public $filename;
+    public $separator;
+    public $Id;
+    public $Description;
+
+    function __construct(){
+        $this->mainobj=new Main();
+        $this->mainobj->filename="DonationTypes.txt";
+        $this->mainobj->separator="~";
+    }
+
+    function getDonationTypeById($Id){
+        $line=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
+        if (!empty(trim($line))) {
+        $ArrayLine = explode($this->mainobj->separator, $line);
+        $donation = new DonationType();
+        $donation->Id = $ArrayLine[0];
+        $donation->type = $ArrayLine[1];
+        $donation->Description = $ArrayLine[2];
+        return $donation;
+        }
+    }
+    function ListallDonationTypes(){
+        $arr=[];
+        $i=0;
+        $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
+    while (!feof($file)) {
+        $line = fgets($file);
+        if (!empty(trim($line))) {
+        $ArrayLine = explode($this->mainobj->separator, $line);
+       $arr[$i]=$this->getDonationTypeById($ArrayLine[0]);
+       $i++;
+        }
+    }
+    fclose($file);
+    return $arr;
+    }
+    function deleteDonationType($Id, $filename) {
+        $file = file($filename);
+    
+        foreach ($file as $key => $line) {
+            $DonationTypeData = explode("~", $line);
+            if ($DonationTypeData[0] == $Id) {
+                
+                $file[$key] = "";
+                file_put_contents($filename, implode("", $file));
+                
+            
+            }
+        }
+    }
+    function InsertDonationType()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+            $type = $_POST["Type"];
+            $description = $_POST["Description"];
+            $lastId = $this->mainobj->getLastId($this->mainobj->filename,$this->mainobj->separator);
+            $id = $lastId + 1;
+            $DonationTypeInfo = "$id~$type~$description\n";
+            $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
+            fwrite($file, $DonationTypeInfo);
+            fclose($file);
+            header("Location:DonationType.php");
+            exit();
+           
+        }
+    }
+    function handleDonationTypeEdit()
+{
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $type = $_POST["Type"];
+        $Description = $_POST["Description"];
+        
+        $filename = $this->mainobj->filename;
+        $file = file($filename);
+
+
+        
+        foreach ($file as $key => $line) {
+            $DonationTypeData = explode($this->mainobj->separator, $line);
+            if ($DonationTypeData[0] == $id) {
+                $file[$key] = "$id~$type~$Description\n";
+                break;
+            }
+        }
+
+        // Write updated user data back to file
+        file_put_contents($filename, implode("", $file));
+       
+    }
 }
 }
 

@@ -1,8 +1,35 @@
+<?php
+include_once"Function.php";
+$type=new DonationType();
+$types=$type->ListallDonationTypes();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Edit Donation Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Donation insertion">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <style>
+  .rating {
+        display: flex;
+        align-items: center;
+    }
+    .rating input[type="radio"] {
+        display: none;
+        margin-right: 10px;
+    }
+    .rating label {
+        cursor: pointer;
+        font-size: 45px;
+        color: #ddd;
+    }
+    .rating input[type="radio"]:checked ~ label {
+        color: gold;
+    }
+
+</style>
 </head>
 <body>
     <h2>Edit Donation Information</h2>
@@ -33,7 +60,28 @@
                         Date: <input type="text" name="Date" value="<?php echo $Date; ?>"><br>
                         RecipientId: <input type="text" name="RecipientId" value="<?php echo $RecipientId; ?>"><br>
                         Feedback: <input type="text" name="Feedback" value="<?php echo $feedback; ?>"><br>
-                        Rating: <input type="text" name="Rating" value="<?php echo $rating; ?>"><br>
+                        Rating:
+                        <div class="rating">
+                        <input type="radio" id="star5" name="Rating" value="5 stars" />
+                        <label for="star5">☆</label>
+                        <input type="radio" id="star4" name="Rating" value="4 stars" />
+                        <label for="star4">☆</label>
+                        <input type="radio" id="star3" name="Rating" value="3 stars" />
+                        <label for="star3">☆</label>
+                        <input type="radio" id="star2" name="Rating" value="2 stars" />
+                        <label for="star2">☆</label>
+                        <input type="radio" id="star1" name="Rating" value="1 stars" />
+                        <label for="star1">☆</label>
+                    </div>
+                        Donation Type:
+                        <select name="DonationTypeId">
+                            <?php
+                            foreach ($types as $donationType) {
+                                $selected = ($donationType->Id == $DonationTypeId) ? 'selected' : '';
+                                echo "<option value='" . $donationType->Id . "' $selected>" . $donationType->type . "</option>";
+                            }
+                            ?>
+                        </select><br>
                         <input type="hidden" name="time" value="<?php echo $time; ?>">
                         <input type="submit" name="edit" value="Save Changes">
                     </form>

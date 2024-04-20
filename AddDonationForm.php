@@ -1,3 +1,8 @@
+<?php
+include_once"Function.php";
+$type=new DonationType();
+$types=$type->ListallDonationTypes();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +49,18 @@
             <tr>
                 <td>Feedback (if you would like to provide one!):</td>
                 <td><input type="text" name="Feedback"></td>
+            </tr>
+            <tr>
+                <td>Donation Type:</td>
+                <td>
+                    <select name="DonationTypeId">
+                        <?php
+                        foreach ($types as $donationType) {
+                            echo "<option value='" . $donationType->Id . "'>" . $donationType->type . "</option>";
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Rating:</td>
