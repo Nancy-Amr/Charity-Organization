@@ -30,7 +30,7 @@ $obj=new DonationDetails();
                     <td>Date</td>
                     <td>Time</td>
                     <td>Recipient ID</td>
-                    <td>Donor Info</td>
+                    <td>Donor Id</td>
                     <td>feedback</td> 
                     <td>Rating</td> 
             </tr> 
