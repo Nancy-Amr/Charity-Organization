@@ -493,7 +493,7 @@ class UserType{
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $typeinfo);
         fclose($file);
-        header("Location:user.php");
+        header("Location:userT.php");
 
         // $obj=new UserType();
         // $obj->InsertType($id,$type);
