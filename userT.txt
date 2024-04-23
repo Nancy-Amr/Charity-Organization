@@ -4,10 +4,9 @@
 57~Reciptionist
 45~Clothes-manager
 9~Volunteer
-1~Admin
 2~Donor
 3~Donor
 4~Donor
 5~Donor
 6~Volunteer
- 7~Volunteer
+1~Admin
