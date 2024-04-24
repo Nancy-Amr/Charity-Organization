@@ -2,6 +2,7 @@
 <?php
 class UserTypeView{
   function showUserType($user){
+    echo "<h1>User Details</h1>";
 echo"<style>
 table{
   border-collapse: collapse;
@@ -20,18 +21,17 @@ table{
     }
   
 </style>";
-echo "<h1>User Details</h1>
-<table>
-    <tr>
-            <td>Id</td>
-            <td>UserName</td>
-            <td>Phone</td>
-            <td>Address</td>
-            <td>Email</td>
-    </tr> 
+echo"<table>
+<tr>
+<th>Id</th>
+<th>UserName</th>
+<th>Phone</th>
+<th>Address</th>
+<th>Email</th>
+</tr>
 </div>";
 echo "<tr><td>".$user->Id."</td><td>".$user->UserName."</td><td>".$user->Phone."</td><td>".$user->Address."</td><td>".$user->Email."</td></tr></table>";
-echo '<button onclick="history.back()">Go Back</button>';
+echo '<br><br><button onclick="history.back()">Go Back</button>';
 
   }
 }
