@@ -2,9 +2,26 @@
 <?php
 class DonationDetailsView{
   function showDonationDetails($don,$type){
-    echo "<h2>Donation Details</h2>";
+    echo "<h1>Donation Details</h1>";
+    echo"<style>
+table{
+border-collapse: collapse;
+width: 70%; 
+background-color: #f2f2f2; /
+ border: 1px solid black;
+ padding: 5px;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+  }
 
-    echo "<table border='1'>
+  th {
+    background-color: #e9e9e9; 
+  }
+
+</style>";
+    echo "<table>
     <tr>
       <th>ID</th>
       <th>Type</th>
