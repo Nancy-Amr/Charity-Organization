@@ -42,7 +42,7 @@ for($i=0;$i<count($arr);$i++){
 ?>
 
 </table>
-<button onclick="location.href='AddDonationTypeForm.php';">Insert New Donation Type</button><br>
+<button onclick="location.href='DonationTypeController.php?Command=Add';">Insert New Donation Type</button><br>
 <button onclick="location.href='Donation.php';">View All Donations</button><br>
 
 </body>

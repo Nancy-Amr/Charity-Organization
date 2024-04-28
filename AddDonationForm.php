@@ -1,8 +1,11 @@
 <?php
-include_once"Function.php";
-$type=new DonationType();
-$types=$type->ListallDonationTypes();
-?>
+class GenerateDonationForm {
+    function generateDonationForm() {
+        include_once"Function.php";
+        $type=new DonationType();
+        $types=$type->ListallDonationTypes();
+
+      echo'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +35,7 @@ $types=$type->ListallDonationTypes();
 </head>
 <body>
 <h1>Please insert donation info:</h1>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="'. $_SERVER['PHP_SELF'].' " method="POST">
         <table>
             <tr>
                 <td>DonorId:</td>
@@ -53,13 +56,12 @@ $types=$type->ListallDonationTypes();
             <tr>
                 <td>Donation Type:</td>
                 <td>
-                    <select name="DonationTypeId">
-                        <?php
+                    <select name="DonationTypeId">';
                         foreach ($types as $donationType) {
                             echo "<option value='" . $donationType->Id . "'>" . $donationType->type . "</option>";
                         }
-                        ?>
-                    </select>
+                    
+                  echo'</select>
                 </td>
             </tr>
             <tr>
@@ -84,13 +86,14 @@ $types=$type->ListallDonationTypes();
             </tr>
         </table>
     </form>
-   
-    <?php
+    </table>
+    </body>
+    </html>';
+                    }
+                }
+
 include_once"Function.php";
 $obj = new DonationDetails();
 $obj->InsertDonation();
        
 ?>
-</table>
-</body>
-</html>

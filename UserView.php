@@ -1,7 +1,7 @@
 
 <?php
-class UserTypeView{
-  function showUserType($user){
+class UserView{
+  function showUser($user){
     echo "<h1>User Details</h1>";
 echo"<style>
 table{

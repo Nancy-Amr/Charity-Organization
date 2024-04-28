@@ -34,7 +34,7 @@ th, td {
       <th>Edit</th>
       <th>Delete</th>
     </tr>
-    <tr><td>".$don->Id."</td><td><a href=DonationTypeController.php?DonId=".$don->TypeId.">".$type->type."</a></td><td>".$don->date."</td><td>".$don->time."</td><td>".$don->recipient."</td><td><a href=UserController.php?DonId=".$don->Id.">".$don->DonorId."</a></td><td>".$don->feedback."</td><td>".$don->Rating."</td>";
+    <tr><td>".$don->Id."</td><td><a href=\"DonationTypeController.php?Command=Show&DonId=".$don->TypeId."\">".$type->type."</a></td><td>".$don->date."</td><td>".$don->time."</td><td>".$don->recipient."</td><td><a href=\"UserController.php?Command=Show&DonId=".$don->Id."\">".$don->DonorId."</a></td><td>".$don->feedback."</td><td>".$don->Rating."</td>";
     if (isset($don->Id) && !empty($don->Id)) {
       echo "<td><a href='EditDonationForm.php?action=edit&id={$don->Id}'>Edit</a></td>";
       echo "<td><a href='DeleteDonationForm.php?action=delete&id={$don->Id}'>Delete</a></td>";

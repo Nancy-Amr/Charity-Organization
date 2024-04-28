@@ -1,9 +1,23 @@
 
 <?php
 include_once"Function.php";
-include_once"UserTypeView.php";
+include_once"UserView.php";
+include_once"UserForm.php";
+
+$Command=$_GET["Command"];
+
+if ($Command=="Show"){
 $obj=new User();
-$objView= new UserTypeView();
+$objView= new UserView();
 $user=$obj->getUserById($_GET["DonId"]);
-$objView->showUserType($user);
+$objView->showUser($user);
+}
+
+if($Command=="Add"){
+    $newobj= new GenerateUserForm();
+    $newobj->generateUserForm();
+}
+
+
+
 ?>

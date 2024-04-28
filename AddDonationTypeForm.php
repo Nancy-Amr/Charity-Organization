@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+
+class GenerateDonationTypeForm {
+     function generateDonationType() {
+       echo'<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Donation Type Insertion</title>
@@ -9,7 +13,7 @@
 </head>
 <body>
 <h1>Please insert Donation Type:</h1>
-    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <form action="'. $_SERVER['PHP_SELF'] .'" method="POST">
         <tr>
             Type:<input type="text" name="Type"></td>
             Description:<input type="text" name="Description"></td>
@@ -19,11 +23,14 @@
         </tr>
     </form>
    
-    <?php
-include_once"Function.php";
-$obj = new DonationType();
-$obj->InsertDonationType();
-?>
+    
 </table>
 </body>
-</html>
+</html>';
+     }
+    }
+     include_once"Function.php";
+     $obj = new DonationType();
+     $obj->InsertDonationType();
+    
+    ?>
