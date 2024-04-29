@@ -18,6 +18,6 @@ if (isset($_GET['Username'])) {
 </head>
 <body>
     
-    <p><a href="user.php">User Management</a></p>
+    <p><a href="View/user.php">User Management</a></p>
 </body>
 </html>
