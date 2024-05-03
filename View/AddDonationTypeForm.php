@@ -13,7 +13,7 @@ class GenerateDonationTypeForm {
 </head>
 <body>
 <h1>Please insert Donation Type:</h1>
-    <form action="'. $_SERVER['PHP_SELF'] .'" method="POST">
+    <form action="../Controllers/DonationTypeController.php?Command=Add" method="POST">
         <tr>
             Type:<input type="text" name="Type"></td>
             Description:<input type="text" name="Description"></td>
@@ -29,8 +29,6 @@ class GenerateDonationTypeForm {
 </html>';
      }
     }
-     include_once"../Models/DonationType/DonationTypeClass.php";
-     $obj = new DonationType();
-     $obj->InsertDonationType();
+     
     
     ?>

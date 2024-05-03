@@ -54,30 +54,20 @@ Class DonationType{
             }
         }
     }
-    function InsertDonationType()
+    function InsertDonationType($DonationTypeInfo)
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-            $type = $_POST["Type"];
-            $description = $_POST["Description"];
-            $lastId = $this->mainobj->getLastId($this->mainobj->filename,$this->mainobj->separator);
-            $id = $lastId + 1;
-            $DonationTypeInfo = "$id~$type~$description\n";
+       
             $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
             fwrite($file, $DonationTypeInfo);
             fclose($file);
             header("Location:../View/DonationType.php");
             exit();
            
-        }
-    }
-    function handleDonationTypeEdit()
-{
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $type = $_POST["Type"];
-        $Description = $_POST["Description"];
         
+    }
+    function handleDonationTypeEdit($DonationTypeInfo)
+{
+    $DonationT = explode($this->mainobj->separator, $DonationTypeInfo);
         $filename = $this->mainobj->filename;
         $file = file($filename);
 
@@ -85,16 +75,17 @@ Class DonationType{
         
         foreach ($file as $key => $line) {
             $DonationTypeData = explode($this->mainobj->separator, $line);
-            if ($DonationTypeData[0] == $id) {
-                $file[$key] = "$id~$type~$Description\n";
+            if ($DonationTypeData[0] == $DonationT[0]) {
+                $file[$key] = $DonationTypeInfo;
                 break;
             }
         }
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
-       
-    }
+        header("Location:../View/DonationType.php");
+        exit();
+    
 }
 }
 
