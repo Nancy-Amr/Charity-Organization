@@ -66,34 +66,37 @@ class Donation{
             }
         }
     }
-    function InsertDonation($id,$date)
+    function InsertDonation($DonationInfo)
 {
-        $DonationInfo = "$id~$date\n";
+        $Donation = explode($this->mainobj->separator, $DonationInfo);
+        $DonationData = "$Donation[0]~$Donation[1]\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
-        fwrite($file, $DonationInfo);
+        fwrite($file, $DonationData);
         fclose($file);
-        //$obj=new Donation;
         header("Location:../View/Donation.php");
         exit();
+
     }
-    function handleDonationEdit($id,$date)
+    function handleDonationEdit($DonationInfo)
 {
    
         $filename = $this->mainobj->filename;
         $file = file($filename);
 
-
+        $Donation = explode($this->mainobj->separator, $DonationInfo);
         // Iterate over each line in the file
         foreach ($file as $key => $line) {
             $DonationData = explode($this->mainobj->separator, $line);
-            if ($DonationData[0] == $id) {
-                $file[$key] = "$id~$date~\n";
+            if ($DonationData[0] == $Donation[0]) {
+                $file[$key] = "$Donation[0]~$Donation[1]\n";
                 break;
             }
         }
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
+        header("Location:../View/Donation.php");
+        exit();
     }
 
 }

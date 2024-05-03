@@ -29,7 +29,7 @@
 
 
 include_once "../Controllers/DonationController.php";
-$arr=DonationController::handleCommand('Show',null,null);
+$arr=DonationController::handleCommand('Show',null);
 
 for($i=0;$i<count($arr);$i++){
     echo"<tr><td><a href=\"../Controllers/DonationDetailsController.php?Command=Show&Id=".$arr[$i]->Id."\">".$arr[$i]->Id."</a></td><td>".$arr[$i]->date."</td>";

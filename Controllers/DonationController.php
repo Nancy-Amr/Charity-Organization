@@ -1,7 +1,7 @@
 <?php
 include_once"../Models/Donation/DonationClass.php";
 class DonationController{
-public static function handleCommand($Command, $date, $id) {
+public static function handleCommand($Command,$Donationinfo) {
 
 if ($Command=="Show"){
     $obj=new Donation();
@@ -11,7 +11,7 @@ if ($Command=="Show"){
 }
 if($Command=="Add"){
     $new=new Donation();
-    $new->InsertDonation($id,$date);
+    $new->InsertDonation($Donationinfo);
 }
 }
    

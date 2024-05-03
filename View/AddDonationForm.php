@@ -35,7 +35,7 @@ class GenerateDonationForm {
 </head>
 <body>
 <h1>Please insert donation info:</h1>
-<form action="'. $_SERVER['PHP_SELF'].' " method="POST">
+<form action="../Controllers/DonationDetailsController.php?Command=Add" method="POST">
         <table>
             <tr>
                 <td>DonorId:</td>
@@ -43,7 +43,7 @@ class GenerateDonationForm {
             </tr>
             <tr>
                 <td>Date:</td>
-                <td><input type="text" name="Date"></td>
+                <td><input type="date" name="Date"></td>
             </tr>
             <tr>
                 <td>RecipientId:</td>
@@ -92,8 +92,6 @@ class GenerateDonationForm {
                     }
                 }
 
-include_once"../Models/DonationDetails/DonationDetailsClass.php";
-$obj = new DonationDetails();
-$obj->InsertDonation();
+
        
 ?>
