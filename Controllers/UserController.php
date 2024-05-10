@@ -18,6 +18,20 @@ if($Command=="Add"){
     $newobj->generateUserForm();
 }
 
-
+if($Command=="Edit"){
+    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $id = $_POST["id"];
+        $username = $_POST["Username"];
+        $phone = $_POST["Phone"];
+        $address = $_POST["Address"];
+        $email = $_POST["Email"];
+        $password = $_POST["Password"];
+        $usertype = $_POST["UserType"];
+        $userinfo="$id~$username~$phone~$address~$email~$password~$usertype\n";
+        $obj = new User();
+        $obj->handleUserEdit($userinfo);
+    }
+}
 
 ?>

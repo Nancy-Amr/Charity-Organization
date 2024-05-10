@@ -54,16 +54,9 @@ function DrawTableFromFile()
     fclose($myfile);
 
 }
-function handleUserEdit()
+function handleUserEdit($user)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $username = $_POST["Username"];
-        $phone = $_POST["Phone"];
-        $address = $_POST["Address"];
-        $email = $_POST["Email"];
-        $password = $_POST["Password"];
-        $usertype = $_POST["UserType"];
+   
         // Read user data from file
         $filename = $this->mainobj->filename;
         $file = file($filename);
@@ -73,17 +66,18 @@ function handleUserEdit()
         foreach ($file as $key => $line) {
             $userData = explode($this->mainobj->separator, $line);
             // Check if the ID matches
-            if ($userData[0] == $id) {
+            if ($userData[0] == $user[0]) {
                 // Update user data
-                $file[$key] = "$id~$username~$phone~$address~$email~$password~$usertype\n";
+                $file[$key] = $user;
                 break;
             }
         }
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
+        header("Location:../View/user.php");
 
-    }
+    
 }
 
 

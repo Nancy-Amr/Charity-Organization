@@ -16,14 +16,15 @@
     $userT=new UserType();
     $types=$userT->ListallUtypes();
     // Check if form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Call function to handle user edit
-       $obj-> handleUserEdit();
+    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //     // Call function to handle user edit
+    //    $obj-> handleUserEdit();
         
-        // Redirect to user page after editing
-        header("Location:user.php");
-        exit();
-    } else {
+    //     // Redirect to user page after editing
+    //     header("Location:user.php");
+    //     exit();
+    // } 
+    // else {
         // Retrieve user data if ID is provided
         if (isset($_GET['id']) && $_GET['id'] !== '') {
             $userId = $_GET['id'];
@@ -39,7 +40,7 @@
                     list($id, $username, $phone, $address, $email,$password,$userTypeId) = $userData;
                     // $type=$userT->gettypebyID($userData[0]);
     ?>             
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <form action="../Controllers/UserController.php?Command=Edit" method="POST">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                         Username: <input type="text" name="Username" value="<?php echo $username; ?>"><br>
                         Phone: <input type="text" name="Phone" value="<?php echo $phone; ?>"><br>
@@ -64,7 +65,7 @@
         } else {
             echo "User ID not provided.";
         }
-    }
+    //}
     ?>
 </body>
 </html>
