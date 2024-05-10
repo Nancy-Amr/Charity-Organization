@@ -3,6 +3,8 @@
 <head>
     <title>Edit User Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    
 </head>
 <body>
     <h2>Edit User Information</h2>
