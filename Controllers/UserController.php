@@ -16,6 +16,22 @@ $objView->showUser($user);
 if($Command=="Add"){
     $newobj= new GenerateUserForm();
     $newobj->generateUserForm();
+    $obj = new User();
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        $username = $_POST["Username"];
+        $phone = $_POST["Phone"];
+        $address = $_POST["Address"];
+        $email = $_POST["Email"];
+        $password = $_POST["Password"];
+        $usertype = $_POST["UserType"];
+        $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,"~");
+        $id = $lastId + 1;
+        $UserInfo = "$id~$username~$phone~$address~$email~$password~$usertype\n";
+        $obj->InsertUser($UserInfo);
+    }
+
 }
 
 if($Command=="Edit"){

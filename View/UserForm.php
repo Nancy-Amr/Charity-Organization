@@ -17,7 +17,7 @@ class GenerateUserForm {
         </head>
         <body>
             <h1>Please insert your info:</h1>
-            <form action="' . $_SERVER['PHP_SELF'] . '" method="POST">
+            <form action="../Controllers/UserController.php?Command=Add" method="POST">
                 <table>
                     <tr>
                         <td>Username:<input type="text" name="Username"></td>
@@ -56,10 +56,10 @@ class GenerateUserForm {
     }
 }
 
-include_once "../Models/User/UserClass.php";
+// include_once "../Models/User/UserClass.php";
 
-$obj = new User();
-$obj->InsertUser();
+// $obj = new User();
+// $obj->InsertUser();
 
 ?>
 

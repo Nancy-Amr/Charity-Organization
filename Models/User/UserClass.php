@@ -102,25 +102,15 @@ function deleteUser($userId) {
     }
 }
 
-function InsertUser()
+function InsertUser($UserInfo)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        $username = $_POST["Username"];
-        $phone = $_POST["Phone"];
-        $address = $_POST["Address"];
-        $email = $_POST["Email"];
-        $password = $_POST["Password"];
-        $usertype = $_POST["UserType"];
-        $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
-        $id = $lastId + 1;
-        $UserInfo = "$id~$username~$phone~$address~$email~$password~$usertype\n";
+    
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $UserInfo);
         fclose($file);
         header("Location:../View/user.php?");
         exit();
-    }
+    
 }
 // function getUserByName($name){
 //     if(!file_exists($fileName)){return 0;}
