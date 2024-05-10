@@ -12,7 +12,7 @@ $obj=new DonationDetails();
     <meta  name ="description" content = "">
     <meta  name ="viewport" content ="width= device-width, initial scale=1">
     <script src="" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" media="screen" href='main.css'/>
+    <link rel="stylesheet" type="text/css" media="screen" href='../main.css'/>
     <script src='main.js'></script>
     <style>
         table, th, td {
