@@ -8,7 +8,7 @@ class GenerateDonationTypeForm {
     <title>Donation Type Insertion</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <link rel="stylesheet" type="text/css" href="../style.css">
 
 </head>
 <body>
