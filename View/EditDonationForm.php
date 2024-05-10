@@ -10,7 +10,7 @@ $types=$type->ListallDonationTypes();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Donation insertion">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <link rel="stylesheet" type="text/css" href="../style.css">
     <style>
   .rating {
         display: flex;
@@ -28,6 +28,7 @@ $types=$type->ListallDonationTypes();
     .rating input[type="radio"]:checked ~ label {
         color: gold;
     }
+   
 
 </style>
 </head>
