@@ -54,7 +54,7 @@ $types=$type->ListallDonationTypes();
                 $DonationData = explode("~", $line);
 
                 if (!empty($DonationData) && $DonationData[0] == $DonationId) {
-                    list($id,$Date, $RecipientId, $DonorId, $feedback,$time,$rating) = $DonationData;
+                    list($id,$Date, $RecipientId, $DonorId, $feedback,$time,$rating,$DonationTypeId) = $DonationData;
     ?>
                     <form action="../Controllers/DonationDetailsController.php?Command=Edit" method="POST">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">

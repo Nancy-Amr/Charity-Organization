@@ -2,6 +2,7 @@
 include_once"../Function.php";
 include_once"../Models/UserType/UserTypeClass.php";
 
+
 class User{
     public $UserName;
     public $Id;
@@ -9,6 +10,7 @@ class User{
     Public $Address;
     public $Email;
     public $Password;
+    public $TypeId;
     function __construct(){
         $this->mainobj=new Main();
         $this->mainobj->filename="../user.txt";
@@ -23,6 +25,7 @@ class User{
     $this->Address=$ArrayLine[3];
     $this->Email=$ArrayLine[4];
     $this->Password=$ArrayLine[5];
+    $this->TypeId=$ArrayLine[6];
     return $this;
 } 
 function DrawTableFromFile()
@@ -32,11 +35,11 @@ function DrawTableFromFile()
     while (!feof($myfile)) {
 
         $line = fgets($myfile);
-        if (!empty(trim($line))) {  //skip empty line
+        if (!empty(trim($line))) {  
             echo "<tr>";
             $ArrayLine = explode($this->mainobj->separator, $line);
-            $type=$obj->gettypebyID($ArrayLine[0]);
-            for ($i = 0; $i < count($ArrayLine); $i++) {
+            $type=$obj->gettypebyID($ArrayLine[6]);
+            for ($i = 0; $i < count($ArrayLine)-1; $i++) {
                 echo "<td>" . $ArrayLine[$i] . "</td>";
             }
             echo"<td>".$type->type."</td>";
@@ -60,7 +63,7 @@ function handleUserEdit()
         $address = $_POST["Address"];
         $email = $_POST["Email"];
         $password = $_POST["Password"];
-
+        $usertype = $_POST["UserType"];
         // Read user data from file
         $filename = $this->mainobj->filename;
         $file = file($filename);
@@ -72,7 +75,7 @@ function handleUserEdit()
             // Check if the ID matches
             if ($userData[0] == $id) {
                 // Update user data
-                $file[$key] = "$id~$username~$phone~$address~$email~$password\n";
+                $file[$key] = "$id~$username~$phone~$address~$email~$password~$usertype\n";
                 break;
             }
         }
@@ -114,13 +117,14 @@ function InsertUser()
         $address = $_POST["Address"];
         $email = $_POST["Email"];
         $password = $_POST["Password"];
+        $usertype = $_POST["UserType"];
         $lastId = $this->mainobj->getLastId($this->mainobj->filename,"~");
         $id = $lastId + 1;
-        $UserInfo = "$id~$username~$phone~$address~$email~$password\n";
+        $UserInfo = "$id~$username~$phone~$address~$email~$password~$usertype\n";
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $UserInfo);
         fclose($file);
-        header("Location:../View/userTypeForm.php? Id= $id");
+        header("Location:../View/user.php?");
         exit();
     }
 }

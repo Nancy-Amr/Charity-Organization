@@ -16,7 +16,7 @@
        $obj-> handleTypeEdit();
         
         // Redirect to user page after editing
-        header("Location:user.php");
+        header("Location:userT.php");
         exit();
     } else {
         // Retrieve user data if ID is provided

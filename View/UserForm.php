@@ -2,6 +2,9 @@
 
 class GenerateUserForm {
      function generateUserForm() {
+        include_once"../Models/UserType/UserTypeClass.php";
+        $type=new UserType();
+        $types=$type->ListallUtypes();
        echo
         '<!DOCTYPE html>
         <html lang="en">
@@ -31,6 +34,16 @@ class GenerateUserForm {
                     <tr>
                         <td>Password:<input type="text" name="Password"></td>
                     </tr>
+                    <tr>
+                    <td>User Type:
+                   <select name="UserType">';
+                        foreach ($types as $userType) {
+                            echo "<option value='" . $userType->id . "'>" . $userType->type . "</option>";
+                        }
+                    
+                  echo'</select>
+                  </td>
+                  </tr>
                     <tr>
                         <td colspan="5"><input type="submit" ></td>
                     </tr>

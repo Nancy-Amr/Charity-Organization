@@ -67,15 +67,15 @@ class UserType{
     function InsertType()
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
+        // $id = $_POST["id"];
         $type = $_POST["type"];
-        $lastId = $this->UTmainobj->getLastId($this->UTmainobj->filename,"~");
-        //$Id = $lastId + 1;
-        $typeinfo = "$id~$type\n";
+        $lastId = $this->UTmainobj->getLastId($this->UTmainobj->filename,$this->UTmainobj->separator);
+        $Id = $lastId + 1;
+        $typeinfo = "$Id~$type\n";
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $typeinfo);
         fclose($file);
-        header("Location:../View/user.php");
+        header("Location:../View/userT.php");
 
         // $obj=new UserType();
         // $obj->InsertType($id,$type);
