@@ -37,7 +37,7 @@ if($Command=="Edit"){
         $id = $_POST["id"];
         $type = $_POST["Type"];
         $Description = $_POST["Description"];
-        $DonationTypeInfo = "$id~$type~$description\n";
+        $DonationTypeInfo = "$id~$type~$Description\n";
 
         $obj=new DonationType();
         $obj->handleDonationTypeEdit($DonationTypeInfo);

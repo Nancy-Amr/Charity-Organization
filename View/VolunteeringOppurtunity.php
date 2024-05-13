@@ -64,7 +64,7 @@ for($i=0;$i<count($arr);$i++){
 
     if (isset($arr[$i]->Id) && !empty($arr[$i]->Id)) {
         echo "<td><a href='EditOppForm.php?action=edit&id={$arr[$i]->Id}'>Edit</a></td>";
-        echo "<td><a href='DeleteOppForm.php?action=delete&id={$arr[$i]->Id}'>Delete</a></td>";
+        echo "<td><a href=\"../Controllers/VolunteeringOppController.php?Command=Delete&id={$arr[$i]->Id}\">Delete</a></td>";
     }
     echo "</tr>";
 }

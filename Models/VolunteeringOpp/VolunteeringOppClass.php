@@ -44,48 +44,32 @@ class VolunteeringOppurtunity{
     }
 
 
-    function InsertOpp()
+    function InsertOpp($OppInfo)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        $Id = $_POST["Id"];
-        $title = $_POST["title"];
-        $volunteer = $_POST["volunteer"];
-        $location = $_POST["location"];
-        $date = $_POST["date"];
-
-        $lastId = $this->EXmainobj->getLastId($this->EXmainobj->filename,$this->EXmainobj->separator);
-        $id = $lastId + 1;
-        $OppInfo = "$Id~$title~$volunteer~$location~$date\n";
+   
         $file = fopen($this->EXmainobj->filename, "a+") or die("Unable to open file!");
 
         fwrite($file, $OppInfo);
         fclose($file);
-        header("Location:VolunteeringOppurtunity.php");
+        header("Location:../View/VolunteeringOppurtunity.php");
 
         //$obj=new VolunteeringOppurtunity();
         //$obj->InsertOpp();
         
         exit();
        
-    }
+    
 }
-function handleOppEdit()
+function handleOppEdit($OppInfo)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $Id = $_POST["Id"];
-        $title = $_POST["title"];
-        $volunteer = $_POST["volunteer"];
-        $location = $_POST["location"];
-        $date = $_POST["date"];
-        // Read user data from file
+    
+        $Opp = explode($this->EXmainobj->separator, $OppInfo);    
         $filename = $this->EXmainobj->filename;
         $file = file($filename);
-        // Iterate over each line in the file
         foreach ($file as $key => $line) {
             $OppData = explode($this->EXmainobj->separator, $line);
-            if ($OppData[0] == $Id) {
-                $file[$key] = "$Id~$title~$volunteer~$location~$date\n";
+            if ($OppData[0] == $Opp[0]) {
+                $file[$key] = $OppInfo;
                 break;
             }
         }
@@ -94,9 +78,9 @@ function handleOppEdit()
             echo "Failed to save changes.";
             return;
         }
-        header("Location: VolunteeringOppurtunity.php");
+        header("Location:../View/VolunteeringOppurtunity.php");
         exit();
-    }
+    
 }
 /*function handleOppEdit()
 {
