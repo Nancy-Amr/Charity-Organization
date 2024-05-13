@@ -54,7 +54,7 @@ for($i=0;$i<count($arr);$i++){
     echo"<tr><td>".$arr[$i]->Id."</td><td>".$arr[$i]->type."</td><td>".$arr[$i]->Description."</td>";
     if (isset($arr[$i]->Id) && !empty($arr[$i]->Id)) {
         echo "<td><a href='EditDonationType.php?action=edit&id={$arr[$i]->Id}'>Edit</a></td>";
-        echo "<td><a href='DeleteDonationtype.php?action=delete&id={$arr[$i]->Id}'>Delete</a></td>";
+        echo "<td><a href=\"../Controllers/DonationTypeController.php?Command=Delete&id={$arr[$i]->Id}\">Delete</a></td>";
     }
     echo "</tr>";
 }

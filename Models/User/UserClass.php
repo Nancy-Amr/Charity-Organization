@@ -45,7 +45,7 @@ function DrawTableFromFile()
             echo"<td>".$type->type."</td>";
             if (isset($ArrayLine[0]) && !empty($ArrayLine[0])) {
                 echo "<td><a href='../View/EditUserForm.php?action=edit&id={$ArrayLine[0]}'>Edit</a></td>";
-                echo "<td><a href='../View/DeleteUserForm.php?action=delete&id={$ArrayLine[0]}'>Delete</a></td>";
+                echo "<td><a href=\"../Controllers/UserController.php?Command=Delete&id={$ArrayLine[0]}\">Delete</a></td>";
             }
                 
             echo "</tr>";

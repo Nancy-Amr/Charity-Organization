@@ -51,5 +51,15 @@ if($Command=="Edit"){
         $obj->handleUserEdit($userinfo);
     }
 }
+if($Command=="Delete"){
+    $obj=new User();
+if (isset($_GET['id']) && $_GET['id'] !== '') {
+    $userIdToDelete = $_GET['id'];
+    $obj->deleteUser($userIdToDelete, $obj->mainobj->filename);
+    header("Location:../View/user.php");
+    exit(); 
+}
+
+}
 
 ?>

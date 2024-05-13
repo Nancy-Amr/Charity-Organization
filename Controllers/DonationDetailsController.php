@@ -62,7 +62,13 @@ if($Command=="Edit"){
 }
 
 if($Command=="Delete"){
-   
+    $obj=new DonationDetails();
+    if (isset($_GET['id']) && $_GET['id'] !== '') {
+        $DonationIdToDelete = $_GET['id'];
+        $obj->deleteDonation($DonationIdToDelete, $obj->mainobj->filename);
+        header("Location:../View/DonationDetails.php");
+        exit(); 
+    }
 
 }
    

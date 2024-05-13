@@ -64,7 +64,7 @@ for($i=0;$i<count($arr);$i++){
   if (isset($arr[$i]->id) && !empty($arr[$i]->id)) {
       //echo "<td><a href='EditTypeForm.php?action=edit&id={$arr[$i]->id}'>Edit</a></td>";
       echo "<td><a href='EditTypeForm.php?action=edit&id={$arr[$i]->id}'>Edit</a></td>";
-      echo "<td><a href='DeleteTypeForm.php?action=delete&id={$arr[$i]->id}'>Delete</a></td>";
+      echo "<td><a href=\"../Controllers/UserTypeController.php?Command=Delete&id={$arr[$i]->id}\">Delete</a></td>";
   }
   echo "</tr>";
 }

@@ -36,7 +36,16 @@ if($Command=="Edit"){
 }
 
 if($Command=="Delete"){
-   
+    $obj=new UserType();
+
+    if (isset($_GET['id']) && $_GET['id'] !== '') {
+        
+        $IdToDelete = $_GET['id'];
+        $obj->deleteType($IdToDelete, $obj->UTmainobj->filename);
+        
+        header("Location:../View/userT.php");
+        exit(); 
+    }
 
 }
    
