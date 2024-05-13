@@ -42,11 +42,11 @@ class UserType{
             return null;
         }
       
-        $Utype = new UserType();
-        $Utype->id = $ArrayLine[0];
-        $Utype->type = $ArrayLine[1];
         
-        return $Utype;
+        $this->id = $ArrayLine[0];
+        $this->type = $ArrayLine[1];
+        
+        return $this;
       }
       
     function ListallUtypes(){
@@ -57,7 +57,8 @@ class UserType{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->UTmainobj->separator, $line);
-       $arr[$i]=$this->gettypebyID($ArrayLine[0]);
+        $UserT = new UserType();
+       $arr[$i]=$UserT->gettypebyID($ArrayLine[0]);
        $i++;
         }
     }

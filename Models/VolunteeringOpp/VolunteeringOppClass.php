@@ -17,13 +17,13 @@ class VolunteeringOppurtunity{
     function getOppId($Id){
         $line=$this->EXmainobj->getLineWithId($Id,$this->EXmainobj->filename,$this->EXmainobj->separator);
         $ArrayLine = explode($this->EXmainobj->separator, $line);
-        $oppurtunity = new VolunteeringOppurtunity();
-        $oppurtunity->Id = $ArrayLine[0];
-        $oppurtunity->title = $ArrayLine[1];
-        $oppurtunity->volunteer = $ArrayLine[2];
-        $oppurtunity->location = $ArrayLine[3];
-        $oppurtunity->date = $ArrayLine[4];
-        return $oppurtunity;
+        
+        $this->Id = $ArrayLine[0];
+        $this->title = $ArrayLine[1];
+        $this->volunteer = $ArrayLine[2];
+        $this->location = $ArrayLine[3];
+        $this->date = $ArrayLine[4];
+        return $this;
     } 
     
     function ListalloppDetails(){
@@ -34,7 +34,8 @@ class VolunteeringOppurtunity{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->EXmainobj->separator, $line);
-       $arr[$i]=$this->getOppId($ArrayLine[0]);
+        $opp = new VolunteeringOppurtunity();
+       $arr[$i]=$opp->getOppId($ArrayLine[0]);
        $i++;
         }
     }

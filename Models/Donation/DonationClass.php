@@ -15,9 +15,9 @@ class Donation{
     function getDonationById($Id){
         $line=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
         $ArrayLine = explode($this->mainobj->separator, $line);
-        $donation = new Donation();
-        $donation->Id = $ArrayLine[0];
-        $donation->date = $ArrayLine[1];
+        
+        $this->Id = $ArrayLine[0];
+        $this->date = $ArrayLine[1];
 
         // $objDonDet= new DonationDetails();
         // $alldet=[];
@@ -30,7 +30,7 @@ class Donation{
 
         // }
         
-        return $donation;
+        return $this;
     } 
     function ListallDonations(){
         $arr=[];
@@ -40,7 +40,8 @@ class Donation{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
-       $arr[$i]=$this->getDonationById($ArrayLine[0]);
+        $donation = new Donation();
+       $arr[$i]=$donation->getDonationById($ArrayLine[0]);
        $i++;
         }
     }

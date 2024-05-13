@@ -18,11 +18,11 @@ Class DonationType{
         $line=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
-        $donation = new DonationType();
-        $donation->Id = $ArrayLine[0];
-        $donation->type = $ArrayLine[1];
-        $donation->Description = $ArrayLine[2];
-        return $donation;
+        
+        $this->Id = $ArrayLine[0];
+        $this->type = $ArrayLine[1];
+        $this->Description = $ArrayLine[2];
+        return $this;
         }
     }
     function ListallDonationTypes(){
@@ -33,7 +33,8 @@ Class DonationType{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
-       $arr[$i]=$this->getDonationTypeById($ArrayLine[0]);
+        $donationT = new DonationType();
+       $arr[$i]=$donationT->getDonationTypeById($ArrayLine[0]);
        $i++;
         }
     }

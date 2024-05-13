@@ -24,17 +24,17 @@ class DonationDetails{
         $line=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
-        $donation= new DonationDetails();
-        $donation->Id = $ArrayLine[0];
-        $donation->date = $ArrayLine[1];
-        $donation->recipient = $ArrayLine[2];
-        $donation->DonorId = $ArrayLine[3];
-        $donation->feedback = $ArrayLine[4];
-        $donation->time = $ArrayLine[5];
-        $donation->Rating = $ArrayLine[6];
-        $donation->TypeId = $ArrayLine[7];
+        // $donation= new DonationDetails();
+        $this->Id = $ArrayLine[0];
+        $this->date = $ArrayLine[1];
+        $this->recipient = $ArrayLine[2];
+        $this->DonorId = $ArrayLine[3];
+        $this->feedback = $ArrayLine[4];
+        $this->time = $ArrayLine[5];
+        $this->Rating = $ArrayLine[6];
+        $this->TypeId = $ArrayLine[7];
         
-        return $donation;
+        return $this;
         }
     } 
     function ListallDonationDetails(){
@@ -45,7 +45,8 @@ class DonationDetails{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
-       $arr[$i]=$this->getDonationDetById($ArrayLine[0]);
+        $donation = new DonationDetails();
+       $arr[$i]=$donation->getDonationDetById($ArrayLine[0]);
        $i++;
         }
     }
