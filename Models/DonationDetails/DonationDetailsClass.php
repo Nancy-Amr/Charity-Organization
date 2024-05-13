@@ -81,6 +81,7 @@ function handleDonationEdit($DonationInfo)
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
+        header("Location:../View/DonationDetails.php");
         // $obj=new Donation();
         // $obj->handleDonationEdit($DonationInfo);
     
