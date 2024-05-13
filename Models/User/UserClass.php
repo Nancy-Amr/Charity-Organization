@@ -57,7 +57,7 @@ function DrawTableFromFile()
 function handleUserEdit($user)
 {
    
-        // Read user data from file
+    $User = explode($this->mainobj->separator, $user);
         $filename = $this->mainobj->filename;
         $file = file($filename);
 
@@ -66,7 +66,7 @@ function handleUserEdit($user)
         foreach ($file as $key => $line) {
             $userData = explode($this->mainobj->separator, $line);
             // Check if the ID matches
-            if ($userData[0] == $user[0]) {
+            if ($userData[0] == $User[0]) {
                 // Update user data
                 $file[$key] = $user;
                 break;

@@ -65,24 +65,17 @@ class UserType{
     fclose($file);
     return $arr;
     }
-    function InsertType()
+    function InsertType($typeinfo)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // $id = $_POST["id"];
-        $type = $_POST["type"];
-        $lastId = $this->UTmainobj->getLastId($this->UTmainobj->filename,$this->UTmainobj->separator);
-        $Id = $lastId + 1;
-        $typeinfo = "$Id~$type\n";
+    
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $typeinfo);
         fclose($file);
         header("Location:../View/userT.php");
 
-        // $obj=new UserType();
-        // $obj->InsertType($id,$type);
         exit();
        
-    }
+    
 
     
 }
@@ -110,14 +103,9 @@ class UserType{
 //         $obj->handleTypeEdit($id,$type);
 //     }
 // }
-function handleTypeEdit()
+function handleTypeEdit($typeinfo)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $type = $_POST["Type"];
-        
-
-        // Read user data from file
+    $UserT = explode($this->UTmainobj->separator, $typeinfo);
         $filename = $this->UTmainobj->filename;
         $file = file($filename);
 
@@ -126,17 +114,18 @@ function handleTypeEdit()
         foreach ($file as $key => $line) {
             $userData = explode($this->UTmainobj->separator, $line);
             // Check if the ID matches
-            if ($userData[0] == $id) {
+            if ($userData[0] == $UserT[0]) {
                 // Update user data
-                $file[$key] = "$id~$type\n";
+                $file[$key] = $typeinfo;
                 break;
             }
         }
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
+        header("Location:../View/UserT.php");
 
-    }
+    
 }
 
 function deleteType($id, $filename) {
@@ -145,7 +134,7 @@ function deleteType($id, $filename) {
 
     // Iterate over each line in the file
     foreach ($file as $key => $line) {
-        $type = explode("~", $line);
+        $type = explode($this->UTmainobj->separator, $line);
         // Check if the ID matches
         if ($type[0] == $id) {
             // Remove the line corresponding to the user

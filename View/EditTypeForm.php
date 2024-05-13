@@ -10,18 +10,19 @@
     <?php
     include_once "../Models/UserType/UserTypeClass.php";
     $obj=new UserType();
-    // Check if form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Call function to handle user edit
-       $obj-> handleTypeEdit();
+    // // Check if form is submitted
+    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //     // Call function to handle user edit
+    //    $obj-> handleTypeEdit();
         
-        // Redirect to user page after editing
-        header("Location:userT.php");
-        exit();
-    } else {
+    //     // Redirect to user page after editing
+    //     header("Location:userT.php");
+    //     exit();
+    // } 
+    // else {
         // Retrieve user data if ID is provided
         if (isset($_GET['id']) && $_GET['id'] !== '') {
-            $userId = $_GET['id'];
+            $TypeId = $_GET['id'];
             $filename = $obj->UTmainobj->filename;
             $file = fopen($filename, "r") or die("Unable to open file!");
 
@@ -30,10 +31,10 @@
                 $line = fgets($file);
                 $usertype = explode($obj->UTmainobj->separator, $line);
 
-                if (!empty($usertype) && $usertype[0] == $userId) {
+                if (!empty($usertype) && $usertype[0] == $TypeId) {
                     list($id, $type) = $usertype;
     ?>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <form action="../Controllers/UserTypeController.php?Command=Edit" method="POST">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                         
                         Type: <input type="text" name="Type" value="<?php echo $type; ?>"><br>
@@ -48,7 +49,7 @@
         } else {
             echo "User ID not provided.";
         }
-    }
+    //}
     ?>
 </body>
 </html>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>Please insert your info:</h1>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="../Controllers/UserTypeController.php?Command=Add" method="POST">
 
     <!-- <tr>
       <td>ID:</td>
@@ -28,11 +28,7 @@
   </tr>
 </form>
 
-    <?php
-include_once"../Models/UserType/UserTypeClass.php";
-$obj = new UserType();
-$obj->InsertType();
-?>
+
 </table>
 </body>
 </html>
