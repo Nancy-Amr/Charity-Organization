@@ -59,7 +59,7 @@ class DonationDetails{
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $DonationInfo);
         fclose($file);
-        DonationController::handleCommand("Add", $DonationInfo);
+        header("Location:../View/DonationDetails.php");
         exit();
        
     
@@ -81,8 +81,8 @@ function handleDonationEdit($DonationInfo)
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
-        $obj=new Donation();
-        $obj->handleDonationEdit($DonationInfo);
+        // $obj=new Donation();
+        // $obj->handleDonationEdit($DonationInfo);
     
 }
 
@@ -105,8 +105,8 @@ function deleteDonation($Id, $filename) {
         
         }
     }
-    $obj=new Donation();
-    $obj->deleteDonation($Id, $obj->mainobj->filename);
+    // $obj=new Donation();
+    // $obj->deleteDonation($Id, $obj->mainobj->filename);
 }
 }
 

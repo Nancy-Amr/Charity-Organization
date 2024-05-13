@@ -14,8 +14,7 @@ $objView->showDonationType($DonType);
 }
 
 if($Command=="Add"){
-    $newobj= new GenerateDonationTypeForm();
-    $newobj->generateDonationType();
+    
      if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $obj = new DonationType();
 
@@ -28,7 +27,10 @@ if($Command=="Add"){
      $obj->InsertDonationType($DonationTypeInfo);
      
     }  
-    
+    else{
+        $newobj= new GenerateDonationTypeForm();
+        $newobj->generateDonationType();
+    }
 }
 if($Command=="Edit"){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {

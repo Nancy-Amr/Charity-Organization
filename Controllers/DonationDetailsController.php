@@ -2,6 +2,7 @@
 <?php
 include_once"../Models/DonationDetails/DonationDetailsClass.php";
 include_once"../Models/DonationType/DonationTypeClass.php";
+include_once"../Controllers/DonationController.php";
 include_once"../View/DonationDetailsView.php";
 include_once"../View/AddDonationForm.php";
 $Command=$_GET["Command"];
@@ -15,9 +16,7 @@ $t=$type->getDonationTypeById($don->TypeId);
 $objview->showDonationDetails($don,$t);
 }
 if ($Command=="Add"){
-    $newobj= new GenerateDonationForm();
-    $newobj->generateDonationForm();
-
+   
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $obj = new DonationDetails();
 
@@ -31,11 +30,13 @@ if ($Command=="Add"){
         $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,$obj->mainobj->separator);
         $id = $lastId + 1;
         $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating~$TypeId\n";
-        
+        //DonationController::handleCommand("Add", $DonationInfo);
         $obj->InsertDonation($DonationInfo);
         
 
     }
+    else{$newobj= new GenerateDonationForm();
+        $newobj->generateDonationForm();}
     
        
 }
