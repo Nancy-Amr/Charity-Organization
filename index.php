@@ -7,8 +7,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
    
-   
-    
 </head>
 <body>
 <h2 style="text-align: center;">Login</h2>
@@ -21,6 +19,9 @@
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Login">
     </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="register.php"><button>Register</button></a>
+    </div>
 </body>
 </html>
 
