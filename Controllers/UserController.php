@@ -26,6 +26,11 @@ if($Command=="Add"){
         $usertype = $_POST["UserType"];
         $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,"~");
         $id = $lastId + 1;
+
+
+// Hash the password
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         $UserInfo = "$id~$username~$phone~$address~$email~$password~$usertype\n";
         $obj->Insert($UserInfo);
     }
@@ -46,6 +51,16 @@ if($Command=="Edit"){
         $email = $_POST["Email"];
         $password = $_POST["Password"];
         $usertype = $_POST["UserType"];
+
+// Check if the password field is not empty
+if (!empty($password)) {
+    // Hash the new password
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+} else {
+    // If password field is empty, keep the existing hashed password
+    $hashed_password = "";
+}
+     
         $userinfo="$id~$username~$phone~$address~$email~$password~$usertype\n";
         $obj = new User();
         $obj->handleEdit($userinfo);
