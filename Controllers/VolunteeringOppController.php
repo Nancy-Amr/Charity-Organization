@@ -18,7 +18,7 @@ if ($Command=="Add"){
         $lastId = $obj->EXmainobj->getLastId($obj->EXmainobj->filename,$obj->EXmainobj->separator);
         $id = $lastId + 1;
         $OppInfo = "$Id~$title~$volunteer~$location~$date\n";
-        $obj->InsertOpp($OppInfo);
+        $obj->Insert($OppInfo);
     }
        
 }
@@ -32,7 +32,7 @@ if($Command=="Edit"){
         $location = $_POST["location"];
         $date = $_POST["date"];
         $OppInfo = "$Id~$title~$volunteer~$location~$date\n";
-        $obj->handleOppEdit($OppInfo);
+        $obj->handleEdit($OppInfo);
 
        
     }
@@ -44,7 +44,7 @@ if($Command=="Delete"){
     if (isset($_GET['id']) && $_GET['id'] !== '') {
         
         $OppIdToDelete = $_GET['id'];
-        $obj->deleteOpp($OppIdToDelete, $obj->EXmainobj->filename);
+        $obj->delete($OppIdToDelete);
         header("Location:../View/VolunteeringOppurtunity.php");
         exit(); 
     }

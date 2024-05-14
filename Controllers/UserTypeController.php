@@ -14,7 +14,7 @@ if ($Command=="Add"){
         $lastId = $obj->UTmainobj->getLastId($obj->UTmainobj->filename,$obj->UTmainobj->separator);
         $Id = $lastId + 1;
         $typeinfo = "$Id~$type\n";
-        $obj->InsertType($typeinfo);
+        $obj->Insert($typeinfo);
         
 
     }
@@ -28,7 +28,7 @@ if($Command=="Edit"){
         $type = $_POST["Type"];
         $typeinfo = "$id~$type\n";
 
-        $obj->handleTypeEdit($typeinfo);
+        $obj->handleEdit($typeinfo);
 
        
     }
@@ -41,7 +41,7 @@ if($Command=="Delete"){
     if (isset($_GET['id']) && $_GET['id'] !== '') {
         
         $IdToDelete = $_GET['id'];
-        $obj->deleteType($IdToDelete, $obj->UTmainobj->filename);
+        $obj->delete($IdToDelete);
         
         header("Location:../View/userT.php");
         exit(); 

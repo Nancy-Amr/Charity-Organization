@@ -59,9 +59,9 @@ $obj=new DonationDetails();
 <?php
 $type=new DonationType();
 $arr=[];
-$arr=$obj->ListallDonationDetails();
+$arr=$obj->Listall();
 for($i=0;$i<count($arr);$i++){
-  $t=$type->getDonationTypeById($arr[$i]->TypeId);
+  $t=$type->getById($arr[$i]->TypeId);
     echo"<tr><td>".$arr[$i]->Id."</td><td><a href=\"../Controllers/DonationTypeController.php?Command=Show&DonId=".$arr[$i]->TypeId."\">".$t->type."</a></td><td>".$arr[$i]->date."</td><td>".$arr[$i]->time."</td><td>".$arr[$i]->recipient."</td><td><a href=\"../Controllers/UserController.php?Command=Show&DonId=".$arr[$i]->DonorId."\">".$arr[$i]->DonorId."</a></td><td>".$arr[$i]->feedback."</td><td>".$arr[$i]->Rating."</td>";
     if (isset($arr[$i]->Id) && !empty($arr[$i]->Id)) {
       echo "<td><a href='EditDonationForm.php?action=edit&id={$arr[$i]->Id}'>Edit</a></td>";

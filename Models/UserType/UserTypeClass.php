@@ -2,12 +2,16 @@
 
 include_once"../Function.php";
 
-class UserType{
+class UserType implements CRUDOperations{
     public $type;
    
     public $id;
    
     public $UTmainobj;
+
+    public $separator;
+
+    public $filename;
 
     function __construct(){
         $this->UTmainobj=new Main();
@@ -25,7 +29,7 @@ class UserType{
     //     return $Utype;
     // } 
 
-    function gettypebyID($id){
+    function getbyID($id){
         $line = $this->UTmainobj->getLineWithId($id, $this->UTmainobj->filename, $this->UTmainobj->separator);
         
         // Check if data is retrieved successfully
@@ -49,7 +53,7 @@ class UserType{
         return $this;
       }
       
-    function ListallUtypes(){
+    function Listall(){
         $arr=[];
         $i=0;
         $file = fopen($this->UTmainobj->filename, "r+") or die("Unable to open file!");
@@ -58,18 +62,18 @@ class UserType{
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->UTmainobj->separator, $line);
         $UserT = new UserType();
-       $arr[$i]=$UserT->gettypebyID($ArrayLine[0]);
+       $arr[$i]=$UserT->getbyID($ArrayLine[0]);
        $i++;
         }
     }
     fclose($file);
     return $arr;
     }
-    function InsertType($typeinfo)
+    function Insert($Data)
 {
     
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
-        fwrite($file, $typeinfo);
+        fwrite($file, $Data);
         fclose($file);
         header("Location:../View/userT.php");
 
@@ -103,9 +107,9 @@ class UserType{
 //         $obj->handleTypeEdit($id,$type);
 //     }
 // }
-function handleTypeEdit($typeinfo)
+function handleEdit($Data)
 {
-    $UserT = explode($this->UTmainobj->separator, $typeinfo);
+    $UserT = explode($this->UTmainobj->separator, $Data);
         $filename = $this->UTmainobj->filename;
         $file = file($filename);
 
@@ -116,7 +120,7 @@ function handleTypeEdit($typeinfo)
             // Check if the ID matches
             if ($userData[0] == $UserT[0]) {
                 // Update user data
-                $file[$key] = $typeinfo;
+                $file[$key] = $Data;
                 break;
             }
         }
@@ -128,20 +132,15 @@ function handleTypeEdit($typeinfo)
     
 }
 
-function deleteType($id, $filename) {
-    // Read user data from file
-    $file = file($filename);
+function delete($Id) {
+    $file = file($this->UTmainobj->filename);
 
-    // Iterate over each line in the file
     foreach ($file as $key => $line) {
-        $type = explode($this->UTmainobj->separator, $line);
-        // Check if the ID matches
-        if ($type[0] == $id) {
-            // Remove the line corresponding to the user
-            #unset($file[$key]);
+        $UserTypeData = explode($this->UTmainobj->separator, $line);
+        if ($UserTypeData[0] == $Id) {
+            
             $file[$key] = "";
-            // Write updated user data back to file
-            file_put_contents($filename, implode("", $file));
+            file_put_contents($this->UTmainobj->filename, implode("", $file));
             
         
         }

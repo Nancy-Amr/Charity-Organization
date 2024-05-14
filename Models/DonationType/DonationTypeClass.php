@@ -1,7 +1,7 @@
 <?php
 
 include_once"../Function.php";
-Class DonationType{
+Class DonationType implements CRUDOperations{
     public $type;
     public $filename;
     public $separator;
@@ -14,7 +14,7 @@ Class DonationType{
         $this->mainobj->separator="~";
     }
 
-    function getDonationTypeById($Id){
+    function getById($Id){
         $line=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
@@ -25,7 +25,7 @@ Class DonationType{
         return $this;
         }
     }
-    function ListallDonationTypes(){
+    function Listall(){
         $arr=[];
         $i=0;
         $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
@@ -34,41 +34,41 @@ Class DonationType{
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->mainobj->separator, $line);
         $donationT = new DonationType();
-       $arr[$i]=$donationT->getDonationTypeById($ArrayLine[0]);
+       $arr[$i]=$donationT->getById($ArrayLine[0]);
        $i++;
         }
     }
     fclose($file);
     return $arr;
     }
-    function deleteDonationType($Id, $filename) {
-        $file = file($filename);
+    function delete($Id) {
+        $file = file($this->mainobj->filename);
     
         foreach ($file as $key => $line) {
-            $DonationTypeData = explode("~", $line);
+            $DonationTypeData = explode($this->mainobj->separator, $line);
             if ($DonationTypeData[0] == $Id) {
                 
                 $file[$key] = "";
-                file_put_contents($filename, implode("", $file));
+                file_put_contents($this->mainobj->filename, implode("", $file));
                 
             
             }
         }
     }
-    function InsertDonationType($DonationTypeInfo)
+    function Insert($Data)
     {
        
             $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
-            fwrite($file, $DonationTypeInfo);
+            fwrite($file, $Data);
             fclose($file);
             header("Location:../View/DonationType.php");
             exit();
            
         
     }
-    function handleDonationTypeEdit($DonationTypeInfo)
+    function handleEdit($Data)
 {
-    $DonationT = explode($this->mainobj->separator, $DonationTypeInfo);
+    $DonationT = explode($this->mainobj->separator, $Data);
         $filename = $this->mainobj->filename;
         $file = file($filename);
 
@@ -77,7 +77,7 @@ Class DonationType{
         foreach ($file as $key => $line) {
             $DonationTypeData = explode($this->mainobj->separator, $line);
             if ($DonationTypeData[0] == $DonationT[0]) {
-                $file[$key] = $DonationTypeInfo;
+                $file[$key] = $Data;
                 break;
             }
         }

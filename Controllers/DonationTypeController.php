@@ -9,7 +9,7 @@ $Command=$_GET["Command"];
 if ($Command=="Show"){
 $obj=new DonationType();
 $objView=new DonationTypeView();
-$DonType=$obj->getDonationTypeById($_GET["DonId"]);
+$DonType=$obj->getById($_GET["DonId"]);
 $objView->showDonationType($DonType);
 }
 
@@ -24,7 +24,7 @@ if($Command=="Add"){
         $id = $lastId + 1;
         $DonationTypeInfo = "$id~$type~$description\n";
 
-     $obj->InsertDonationType($DonationTypeInfo);
+     $obj->Insert($DonationTypeInfo);
      
     }  
     else{
@@ -40,7 +40,7 @@ if($Command=="Edit"){
         $DonationTypeInfo = "$id~$type~$Description\n";
 
         $obj=new DonationType();
-        $obj->handleDonationTypeEdit($DonationTypeInfo);
+        $obj->handleEdit($DonationTypeInfo);
         
     }
    
@@ -49,7 +49,7 @@ if($Command=="Delete"){
     $obj=new DonationType();
 if (isset($_GET['id']) && $_GET['id'] !== '') {
     $DonationTypeIdToDelete = $_GET['id'];
-    $obj->deleteDonationType($DonationTypeIdToDelete, $obj->mainobj->filename);
+    $obj->delete($DonationTypeIdToDelete);
     header("Location:../View/DonationType.php");
 
     exit(); 

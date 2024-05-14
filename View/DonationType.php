@@ -49,7 +49,7 @@
 include_once"../Models/DonationType/DonationTypeClass.php";
 $obj=new DonationType();
 $arr=[];
-$arr=$obj->ListallDonationTypes();
+$arr=$obj->Listall();
 for($i=0;$i<count($arr);$i++){
     echo"<tr><td>".$arr[$i]->Id."</td><td>".$arr[$i]->type."</td><td>".$arr[$i]->Description."</td>";
     if (isset($arr[$i]->Id) && !empty($arr[$i]->Id)) {

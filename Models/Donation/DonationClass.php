@@ -32,7 +32,7 @@ class Donation{
         
         return $this;
     } 
-    function ListallDonations(){
+    function Listall(){
         $arr=[];
         $i=0;
         $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");

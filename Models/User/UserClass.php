@@ -3,7 +3,7 @@ include_once"../Function.php";
 include_once"../Models/UserType/UserTypeClass.php";
 
 
-class User{
+class User implements CRUDOperations{
     public $UserName;
     public $Id;
     public $Phone;
@@ -16,7 +16,7 @@ class User{
         $this->mainobj->filename="../user.txt";
         $this->mainobj->separator="~";
     }
-  function getUserById($Id){
+  function getById($Id){
     $x=$this->mainobj->getLineWithId($Id,$this->mainobj->filename,$this->mainobj->separator);
     $ArrayLine = explode($this->mainobj->separator, $x);
     $this->Id=$ArrayLine[0];
@@ -28,6 +28,94 @@ class User{
     $this->TypeId=$ArrayLine[6];
     return $this;
 } 
+
+function handleEdit($Data)
+{
+   
+    $User = explode($this->mainobj->separator, $Data);
+        $filename = $this->mainobj->filename;
+        $file = file($filename);
+
+
+        // Iterate over each line in the file
+        foreach ($file as $key => $line) {
+            $userData = explode($this->mainobj->separator, $line);
+            // Check if the ID matches
+            if ($userData[0] == $User[0]) {
+                // Update user data
+                $file[$key] = $Data;
+                break;
+            }
+        }
+
+        // Write updated user data back to file
+        file_put_contents($filename, implode("", $file));
+        header("Location:../View/user.php");
+
+    
+}
+
+
+function delete($Id) {
+        $file = file($this->mainobj->filename);
+    
+        foreach ($file as $key => $line) {
+            $userData = explode($this->mainobj->separator, $line);
+            if ($userData[0] == $Id) {
+                
+                $file[$key] = "";
+                file_put_contents($this->mainobj->filename, implode("", $file));
+                
+            
+            }
+        }
+    }
+
+function Insert($Data)
+{
+    
+        $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
+        fwrite($file, $Data);
+        fclose($file);
+        header("Location:../View/user.php?");
+        exit();
+    
+}
+// function getUserByName($name){
+//     if(!file_exists($fileName)){return 0;}
+//     $file = fopen($this->mainobj->$filename, "r+") or die("Unable to open file!");
+//     while (!feof($file)) {
+//         $line = fgets($file);
+//         $x = explode($this->mainobj->$separator, $line);
+//         if ($x[1]==$name) {
+//             $ArrayLine = explode($this->mainobj->separator, $x);
+//             $this->Id=$ArrayLine[0];
+//             $this->UserName=$ArrayLine[1];
+//             $this->Phone=$ArrayLine[2];
+//             $this->Address=$ArrayLine[3];
+//             $this->Email=$ArrayLine[4];
+//             $this->Password=$ArrayLine[5];
+//             $this->TypeId=$ArrayLine[6];
+
+//     return $this;
+//         }
+//     }
+//     fclose($file);
+    
+// }
+function Listall(){
+    $arr=array();
+    $i=0;
+    $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
+while (!feof($file)) {
+    $line = fgets($file);
+    $ArrayLine = explode($this->mainobj->separator, $line);
+   $arr[$i]=getById($ArrayLine[0]);
+   $i++;
+}
+fclose($file);
+return $arr;
+}
 function DrawTableFromFile()
 {
     $myfile = fopen($this->mainobj->filename, "r+") or die("unable to open file!");
@@ -38,7 +126,7 @@ function DrawTableFromFile()
         if (!empty(trim($line))) {  
             echo "<tr>";
             $ArrayLine = explode($this->mainobj->separator, $line);
-            $type=$obj->gettypebyID($ArrayLine[6]);
+            $type=$obj->getbyID($ArrayLine[6]);
             for ($i = 0; $i < count($ArrayLine)-1; $i++) {
                 echo "<td>" . $ArrayLine[$i] . "</td>";
             }
@@ -54,98 +142,6 @@ function DrawTableFromFile()
     fclose($myfile);
 
 }
-function handleUserEdit($user)
-{
-   
-    $User = explode($this->mainobj->separator, $user);
-        $filename = $this->mainobj->filename;
-        $file = file($filename);
-
-
-        // Iterate over each line in the file
-        foreach ($file as $key => $line) {
-            $userData = explode($this->mainobj->separator, $line);
-            // Check if the ID matches
-            if ($userData[0] == $User[0]) {
-                // Update user data
-                $file[$key] = $user;
-                break;
-            }
-        }
-
-        // Write updated user data back to file
-        file_put_contents($filename, implode("", $file));
-        header("Location:../View/user.php");
-
-    
-}
-
-
-function deleteUser($userId) {
-    $filename = $this->mainobj->filename;
-    // Read user data from file
-    $file = file($filename);
-
-    // Iterate over each line in the file
-    foreach ($file as $key => $line) {
-        $userData = explode($this->mainobj->separator, $line);
-        // Check if the ID matches
-        if ($userData[0] == $userId) {
-            // Remove the line corresponding to the user
-            #unset($file[$key]);
-            $file[$key] = "";
-            // Write updated user data back to file
-            file_put_contents($filename, implode("", $file));
-            
-        
-        }
-    }
-}
-
-function InsertUser($UserInfo)
-{
-    
-        $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
-        fwrite($file, $UserInfo);
-        fclose($file);
-        header("Location:../View/user.php?");
-        exit();
-    
-}
-// function getUserByName($name){
-//     if(!file_exists($fileName)){return 0;}
-//     $file = fopen($this->mainobj->$filename, "r+") or die("Unable to open file!");
-//     while (!feof($file)) {
-//         $line = fgets($file);
-//         $x = explode($this->mainobj->$separator, $line);
-//         if ($x[1]==$name) {
-//             $ArrayLine = explode($this->mainobj->separator, $x);
-// $user->Id = $ArrayLine[0];
-// $user->UserName = $ArrayLine[1];
-// $user->Phone = $ArrayLine[2];
-// $user->Address = $ArrayLine[3];
-// $user->Email = $ArrayLine[4];
- //  $user->Password = $ArrayLine[5];
-
-//     return $user;
-//         }
-//     }
-//     fclose($file);
-    
-// }
-// function ListallUsers(){
-//     $arr=array();
-//     $i=0;
-//     $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
-// while (!feof($file)) {
-//     $line = fgets($file);
-//     $ArrayLine = explode($this->mainobj->separator, $line);
-//    $arr[$i]=getUserById($ArrayLine[0]);
-//    $i++;
-// }
-// fclose($file);
-// return $arr;
-// }
 }
 
 

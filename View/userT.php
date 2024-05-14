@@ -56,7 +56,7 @@
 include_once"../Models/UserType/UserTypeClass.php";
 $obj=new UserType();
 $arr=[];
-$arr=$obj->ListallUtypes();
+$arr=$obj->Listall();
 for($i=0;$i<count($arr);$i++){
   //echo"<tr><td>".$arr[$i]->id."</a></td><td>".$arr[$i]->type."</td>";
   echo "<tr><td>" . ($arr[$i]->id ?? '') . "</td><td>" . ($arr[$i]->type ?? '') . "</td>";

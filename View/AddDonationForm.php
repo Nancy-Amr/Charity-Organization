@@ -3,7 +3,7 @@ class GenerateDonationForm {
     function generateDonationForm() {
         include_once"../Models/DonationType/DonationTypeClass.php";
         $type=new DonationType();
-        $types=$type->ListallDonationTypes();
+        $types=$type->Listall();
 
       echo'
 <!DOCTYPE html>

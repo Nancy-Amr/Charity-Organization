@@ -1,7 +1,7 @@
 <?php
 include_once"../Models/DonationType/DonationTypeClass.php";
 $type=new DonationType();
-$types=$type->ListallDonationTypes();
+$types=$type->Listall();
 ?>
 <!DOCTYPE html>
 <html lang="en">

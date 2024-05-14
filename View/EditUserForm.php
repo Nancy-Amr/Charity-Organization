@@ -14,7 +14,7 @@
 
     $obj=new User();
     $userT=new UserType();
-    $types=$userT->ListallUtypes();
+    $types=$userT->Listall();
     // Check if form is submitted
     // if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //     // Call function to handle user edit

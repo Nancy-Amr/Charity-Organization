@@ -58,7 +58,7 @@
 include_once"../Models/VolunteeringOpp/VolunteeringOppClass.php";
 $obj=new VolunteeringOppurtunity();
 $arr=[];
-$arr=$obj->ListalloppDetails();
+$arr=$obj->Listall();
 for($i=0;$i<count($arr);$i++){
     echo"<tr><td>".$arr[$i]->Id."</td><td>".$arr[$i]->title."</td><td>".$arr[$i]->volunteer."</td><td>".$arr[$i]->location."</td><td>".$arr[$i]->date."</td>";
 

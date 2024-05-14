@@ -11,8 +11,8 @@ if ($Command=="Show"){
 $obj=new DonationDetails();
 $type=new DonationType();
 $objview= new DonationDetailsView();
-$don=$obj->getDonationDetById($_GET["Id"]);
-$t=$type->getDonationTypeById($don->TypeId);
+$don=$obj->getById($_GET["Id"]);
+$t=$type->getById($don->TypeId);
 $objview->showDonationDetails($don,$t);
 }
 if ($Command=="Add"){
@@ -30,8 +30,7 @@ if ($Command=="Add"){
         $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,$obj->mainobj->separator);
         $id = $lastId + 1;
         $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating~$TypeId\n";
-        //DonationController::handleCommand("Add", $DonationInfo);
-        $obj->InsertDonation($DonationInfo);
+        $obj->Insert($DonationInfo);
         
 
     }
@@ -54,7 +53,7 @@ if($Command=="Edit"){
         $DonationInfo = "$id~$date~$RecipientId~$donorId~$feedback~$time~$Rating~$TypeId\n";
 
         $obj = new DonationDetails();
-        $obj->handleDonationEdit($DonationInfo);
+        $obj->handleEdit($DonationInfo);
 
        
     }
@@ -65,7 +64,7 @@ if($Command=="Delete"){
     $obj=new DonationDetails();
     if (isset($_GET['id']) && $_GET['id'] !== '') {
         $DonationIdToDelete = $_GET['id'];
-        $obj->deleteDonation($DonationIdToDelete, $obj->mainobj->filename);
+        $obj->delete($DonationIdToDelete);
         header("Location:../View/DonationDetails.php");
         exit(); 
     }

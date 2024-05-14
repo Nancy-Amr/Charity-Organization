@@ -4,7 +4,7 @@ class GenerateUserForm {
      function generateUserForm() {
         include_once"../Models/UserType/UserTypeClass.php";
         $type=new UserType();
-        $types=$type->ListallUtypes();
+        $types=$type->Listall();
        echo
         '<!DOCTYPE html>
         <html lang="en">

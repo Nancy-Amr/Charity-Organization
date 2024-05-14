@@ -9,7 +9,7 @@ $Command=$_GET["Command"];
 if ($Command=="Show"){
 $obj=new User();
 $objView= new UserView();
-$user=$obj->getUserById($_GET["DonId"]);
+$user=$obj->getById($_GET["DonId"]);
 $objView->showUser($user);
 }
 
@@ -27,7 +27,7 @@ if($Command=="Add"){
         $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,"~");
         $id = $lastId + 1;
         $UserInfo = "$id~$username~$phone~$address~$email~$password~$usertype\n";
-        $obj->InsertUser($UserInfo);
+        $obj->Insert($UserInfo);
     }
     else{
     $newobj= new GenerateUserForm();
@@ -48,14 +48,14 @@ if($Command=="Edit"){
         $usertype = $_POST["UserType"];
         $userinfo="$id~$username~$phone~$address~$email~$password~$usertype\n";
         $obj = new User();
-        $obj->handleUserEdit($userinfo);
+        $obj->handleEdit($userinfo);
     }
 }
 if($Command=="Delete"){
     $obj=new User();
 if (isset($_GET['id']) && $_GET['id'] !== '') {
     $userIdToDelete = $_GET['id'];
-    $obj->deleteUser($userIdToDelete, $obj->mainobj->filename);
+    $obj->delete($userIdToDelete);
     header("Location:../View/user.php");
     exit(); 
 }
