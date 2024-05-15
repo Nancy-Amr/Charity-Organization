@@ -2,6 +2,9 @@
 
 class GenerateUserForm {
      function generateUserForm() {
+        include_once"../Models/UserType/UserTypeClass.php";
+        $type=new UserType();
+        $types=$type->Listall();
        echo
         '<!DOCTYPE html>
         <html lang="en">
@@ -9,11 +12,12 @@ class GenerateUserForm {
             <title>User Info Insertion</title>
             <meta name="description" content="">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+            <link rel="stylesheet" type="text/css" href="../style.css">
+            
         </head>
         <body>
             <h1>Please insert your info:</h1>
-            <form action="' . $_SERVER['PHP_SELF'] . '" method="POST">
+            <form action="../Controllers/UserController.php?Command=Add" method="POST">
                 <table>
                     <tr>
                         <td>Username:<input type="text" name="Username"></td>
@@ -31,6 +35,16 @@ class GenerateUserForm {
                         <td>Password:<input type="text" name="Password"></td>
                     </tr>
                     <tr>
+                    <td>User Type:
+                   <select name="UserType">';
+                        foreach ($types as $userType) {
+                            echo "<option value='" . $userType->id . "'>" . $userType->type . "</option>";
+                        }
+                    
+                  echo'</select>
+                  </td>
+                  </tr>
+                    <tr>
                         <td colspan="5"><input type="submit" ></td>
                     </tr>
                 </table>
@@ -42,10 +56,10 @@ class GenerateUserForm {
     }
 }
 
-include_once "../Models/User/UserClass.php";
+// include_once "../Models/User/UserClass.php";
 
-$obj = new User();
-$obj->InsertUser();
+// $obj = new User();
+// $obj->InsertUser();
 
 ?>
 

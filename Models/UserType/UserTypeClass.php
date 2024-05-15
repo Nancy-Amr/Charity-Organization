@@ -2,12 +2,16 @@
 
 include_once"../Function.php";
 
-class UserType{
+class UserType implements CRUDOperations{
     public $type;
    
     public $id;
    
     public $UTmainobj;
+
+    public $separator;
+
+    public $filename;
 
     function __construct(){
         $this->UTmainobj=new Main();
@@ -25,7 +29,7 @@ class UserType{
     //     return $Utype;
     // } 
 
-    function gettypebyID($id){
+    function getbyID($id){
         $line = $this->UTmainobj->getLineWithId($id, $this->UTmainobj->filename, $this->UTmainobj->separator);
         
         // Check if data is retrieved successfully
@@ -42,14 +46,14 @@ class UserType{
             return null;
         }
       
-        $Utype = new UserType();
-        $Utype->id = $ArrayLine[0];
-        $Utype->type = $ArrayLine[1];
         
-        return $Utype;
+        $this->id = $ArrayLine[0];
+        $this->type = $ArrayLine[1];
+        
+        return $this;
       }
       
-    function ListallUtypes(){
+    function Listall(){
         $arr=[];
         $i=0;
         $file = fopen($this->UTmainobj->filename, "r+") or die("Unable to open file!");
@@ -57,31 +61,25 @@ class UserType{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->UTmainobj->separator, $line);
-       $arr[$i]=$this->gettypebyID($ArrayLine[0]);
+        $UserT = new UserType();
+       $arr[$i]=$UserT->getbyID($ArrayLine[0]);
        $i++;
         }
     }
     fclose($file);
     return $arr;
     }
-    function InsertType()
+    function Insert($Data)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $type = $_POST["type"];
-        $lastId = $this->UTmainobj->getLastId($this->UTmainobj->filename,"~");
-        //$Id = $lastId + 1;
-        $typeinfo = "$id~$type\n";
+    
         $file = fopen($this->UTmainobj->filename, "a+") or die("Unable to open file!");
-        fwrite($file, $typeinfo);
+        fwrite($file, $Data);
         fclose($file);
-        header("Location:../View/user.php");
+        header("Location:../View/userT.php");
 
-        // $obj=new UserType();
-        // $obj->InsertType($id,$type);
         exit();
        
-    }
+    
 
     
 }
@@ -109,14 +107,9 @@ class UserType{
 //         $obj->handleTypeEdit($id,$type);
 //     }
 // }
-function handleTypeEdit()
+function handleEdit($Data)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = $_POST["id"];
-        $type = $_POST["Type"];
-        
-
-        // Read user data from file
+    $UserT = explode($this->UTmainobj->separator, $Data);
         $filename = $this->UTmainobj->filename;
         $file = file($filename);
 
@@ -125,33 +118,29 @@ function handleTypeEdit()
         foreach ($file as $key => $line) {
             $userData = explode($this->UTmainobj->separator, $line);
             // Check if the ID matches
-            if ($userData[0] == $id) {
+            if ($userData[0] == $UserT[0]) {
                 // Update user data
-                $file[$key] = "$id~$type\n";
+                $file[$key] = $Data;
                 break;
             }
         }
 
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
+        header("Location:../View/UserT.php");
 
-    }
+    
 }
 
-function deleteType($id, $filename) {
-    // Read user data from file
-    $file = file($filename);
+function delete($Id) {
+    $file = file($this->UTmainobj->filename);
 
-    // Iterate over each line in the file
     foreach ($file as $key => $line) {
-        $type = explode("~", $line);
-        // Check if the ID matches
-        if ($type[0] == $id) {
-            // Remove the line corresponding to the user
-            #unset($file[$key]);
+        $UserTypeData = explode($this->UTmainobj->separator, $line);
+        if ($UserTypeData[0] == $Id) {
+            
             $file[$key] = "";
-            // Write updated user data back to file
-            file_put_contents($filename, implode("", $file));
+            file_put_contents($this->UTmainobj->filename, implode("", $file));
             
         
         }

@@ -6,13 +6,13 @@ public static function handleCommand($Command,$Donationinfo) {
 if ($Command=="Show"){
     $obj=new Donation();
     $arr=[];
-    $arr=$obj->ListallDonations();
+    $arr=$obj->Listall();
     return $arr;
 }
-if($Command=="Add"){
-    $new=new Donation();
-    $new->InsertDonation($Donationinfo);
-}
+// if($Command=="Add"){
+//     $new=new Donation();
+//     $new->InsertDonation($Donationinfo);
+// }
 }
    
 }

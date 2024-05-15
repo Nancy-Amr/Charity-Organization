@@ -4,14 +4,14 @@
     <title>Oppurtunity Info Insertion</title>
     <meta name="description" content="Oppurtunity insertion">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <link rel="stylesheet" type="text/css" href="../style.css">
     
 
 
 </head>
 <body>
 <h1>Please insert Oppurtunity info:</h1>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+<form action="../Controllers/VolunteeringOppController.php?Command=Add" method="POST">
         <table>
             <tr>
                 <td>Id:</td>
@@ -42,9 +42,9 @@
     </form>
    
     <?php
-include_once"../Models/VolunteeringOpp/VolunteeringOppClass.php";
-$obj = new VolunteeringOppurtunity();
-$obj->InsertOpp();
+// include_once"../Models/VolunteeringOpp/VolunteeringOppClass.php";
+// $obj = new VolunteeringOppurtunity();
+// $obj->InsertOpp();
        
 ?>
 </table>

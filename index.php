@@ -1,19 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+   
 </head>
 <body>
-    <h2>Login</h2>
+<h2 style="text-align: center;">Login</h2>
     <form action="login.php" method="post">
-        <label >ID:</label>
-        <input type="text" id="id" name="id" required><br><br>
+        <!-- <label >ID:</label>
+        <input type="text" id="id" name="id" required><br><br> -->
+        <label >Email:</label>
+        <input type="text" id="email" name="email" required><br><br>
         <label >Password:</label>
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Login">
     </form>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="register.php"><button>Register</button></a>
+    </div>
 </body>
 </html>
+

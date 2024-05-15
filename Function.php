@@ -1,6 +1,13 @@
 <?php
 
+interface CRUDOperations{
 
+    function getById($Id);
+    function Listall();
+    function delete($Id);
+    function Insert($Data);
+    function handleEdit($Data);
+}
 class Main{
     public $filename;
     public $separator;

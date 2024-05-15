@@ -9,13 +9,12 @@ $Command=$_GET["Command"];
 if ($Command=="Show"){
 $obj=new DonationType();
 $objView=new DonationTypeView();
-$DonType=$obj->getDonationTypeById($_GET["DonId"]);
+$DonType=$obj->getById($_GET["DonId"]);
 $objView->showDonationType($DonType);
 }
 
 if($Command=="Add"){
-    $newobj= new GenerateDonationTypeForm();
-    $newobj->generateDonationType();
+    
      if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $obj = new DonationType();
 
@@ -25,23 +24,37 @@ if($Command=="Add"){
         $id = $lastId + 1;
         $DonationTypeInfo = "$id~$type~$description\n";
 
-     $obj->InsertDonationType($DonationTypeInfo);
+     $obj->Insert($DonationTypeInfo);
      
     }  
-    
+    else{
+        $newobj= new GenerateDonationTypeForm();
+        $newobj->generateDonationType();
+    }
 }
 if($Command=="Edit"){
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST["id"];
         $type = $_POST["Type"];
         $Description = $_POST["Description"];
-        $DonationTypeInfo = "$id~$type~$description\n";
+        $DonationTypeInfo = "$id~$type~$Description\n";
 
         $obj=new DonationType();
-        $obj->handleDonationTypeEdit($DonationTypeInfo);
+        $obj->handleEdit($DonationTypeInfo);
         
     }
    
+}
+if($Command=="Delete"){
+    $obj=new DonationType();
+if (isset($_GET['id']) && $_GET['id'] !== '') {
+    $DonationTypeIdToDelete = $_GET['id'];
+    $obj->delete($DonationTypeIdToDelete);
+    header("Location:../View/DonationType.php");
+
+    exit(); 
+}
+
 }
 
 ?>

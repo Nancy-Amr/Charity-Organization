@@ -3,7 +3,7 @@ class GenerateDonationForm {
     function generateDonationForm() {
         include_once"../Models/DonationType/DonationTypeClass.php";
         $type=new DonationType();
-        $types=$type->ListallDonationTypes();
+        $types=$type->Listall();
 
       echo'
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ class GenerateDonationForm {
     <title>Donation Info Insertion</title>
     <meta name="description" content="Donation insertion">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <link rel="stylesheet" type="text/css" href="../style.css">
     <style>
     .rating {
         display: flex;
@@ -29,6 +29,59 @@ class GenerateDonationForm {
     .rating input[type="radio"]:checked ~ label {
         color: gold;
     }
+    body {
+        font-family: Arial, sans-serif; /* Set a base font family */
+        margin: 0; /* Remove default margin from body */
+        padding: 20px; /* Add some padding for better layout */
+        color:   #45A049;
+        background-color:#F0E6D2 ;
+      }
+      
+      h1 {
+        text-align: center; /* Center align the heading */
+        margin-bottom: 20px; /* Add some space below the heading */
+      }
+      
+      form {
+        width: 400px; /* Set a width for the form */
+        margin: 0 auto; /* Center the form horizontally */
+        border: 1px solid #ccc; /* Add a thin border */
+        padding: 20px; /* Add some padding within the form */
+        border-radius: 5px; /* Add rounded corners for a nicer look */
+        color:   #45A049;
+ }
+      
+      label {
+        display: block; /* Make labels appear on separate lines */
+        margin-bottom: 5px; /* Add some space below labels */
+      }
+      
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"] {
+        width: 100%; /* Make input fields full width */
+        padding: 10px; /* Add padding for better user input */
+        border: 1px solid #ccc; /* Add a thin border */
+        border-radius: 3px; /* Add rounded corners */
+        box-sizing: border-box; /* Include padding within input width */
+      }
+      
+      .address { /* Optional styling for address field if using rows */
+        height: 80px; /* Adjust height as needed */
+      }
+      
+      input[type="submit"] {
+        background-color: #4CAF50; /* Green color for submit button */
+        color: white; /* White text color */
+        padding: 10px 10px; /* Add padding for the button */
+        border: none; /* Remove default button border */
+        border-radius: 5px; /* Add rounded corners */
+        cursor: pointer; /* Change cursor to pointer on hover */
+      }
+      
+      input[type="submit"]:hover {
+        background-color: #45A049; /* Darker green on hover */
+      }
 </style>
 
 

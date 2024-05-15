@@ -3,21 +3,23 @@
 <head>
     <title>Edit oppurtunity Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
 </head>
 <body>
     <h2>Edit oppurtunity Information</h2>
     <?php
     include_once "../Models/VolunteeringOpp/VolunteeringOppClass.php";
     $obj=new VolunteeringOppurtunity();
-    // Check if form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Call function to handle user edit
-        $obj->handleOppEdit();
+    // // Check if form is submitted
+    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //     // Call function to handle user edit
+    //     $obj->handleOppEdit();
         
-        // Redirect to user page after editing
-        header("Location: VolunteeringOppurtunity.php");
-        exit();
-    } else {
+    //     // Redirect to user page after editing
+    //     header("Location: VolunteeringOppurtunity.php");
+    //     exit();
+    // } 
+    // else {
         // Retrieve user data if ID is provided
         if (isset($_GET['id']) && $_GET['id'] !== '') {
             $OppId = $_GET['id'];
@@ -27,12 +29,12 @@
             // Iterate through each line in the file
             while (!feof($file)) {
                 $line = fgets($file);
-                $OppData = explode("~", $line);
+                $OppData = explode($obj->EXmainobj->separator, $line);
 
                 if (!empty($OppData) && $OppData[0] == $OppId) {
                     list($Id ,$title, $volunteer, $location,$Date) = $OppData;
     ?>
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <form action="../Controllers/VolunteeringOppController.php?Command=Edit" method="POST">
                         <input type="hidden" name="id" value="<?php echo $Id; ?>">
 
                         Id: <input type="text" name="Id" value="<?php echo $Id; ?>"><br>
@@ -53,7 +55,7 @@
         } else {
             echo "Oppurtunity ID not provided.";
         }
-    }
+    // }
     ?>
 </body>
 </html>

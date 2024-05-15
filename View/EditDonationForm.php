@@ -1,7 +1,7 @@
 <?php
 include_once"../Models/DonationType/DonationTypeClass.php";
 $type=new DonationType();
-$types=$type->ListallDonationTypes();
+$types=$type->Listall();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,7 @@ $types=$type->ListallDonationTypes();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Donation insertion">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <link rel="stylesheet" type="text/css" href="../style.css">
     <style>
   .rating {
         display: flex;
@@ -28,6 +28,7 @@ $types=$type->ListallDonationTypes();
     .rating input[type="radio"]:checked ~ label {
         color: gold;
     }
+   
 
 </style>
 </head>
@@ -53,7 +54,7 @@ $types=$type->ListallDonationTypes();
                 $DonationData = explode("~", $line);
 
                 if (!empty($DonationData) && $DonationData[0] == $DonationId) {
-                    list($id,$Date, $RecipientId, $DonorId, $feedback,$time,$rating) = $DonationData;
+                    list($id,$Date, $RecipientId, $DonorId, $feedback,$time,$rating,$DonationTypeId) = $DonationData;
     ?>
                     <form action="../Controllers/DonationDetailsController.php?Command=Edit" method="POST">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">

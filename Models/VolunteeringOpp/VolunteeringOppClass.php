@@ -2,31 +2,33 @@
 include_once"../Function.php";
 
 
-class VolunteeringOppurtunity{
+class VolunteeringOppurtunity implements CRUDOperations{
     public $Id;
 
     public $title;
     public $volunteer;
     public $location;
     public $date;
+    public $filename;
+    public $separator;
     function __construct(){
         $this->EXmainobj=new Main();
         $this->EXmainobj->filename="../VolunteeringOppurtunity.txt";
         $this->EXmainobj->separator="~";
     }
-    function getOppId($Id){
+    function getById($Id){
         $line=$this->EXmainobj->getLineWithId($Id,$this->EXmainobj->filename,$this->EXmainobj->separator);
         $ArrayLine = explode($this->EXmainobj->separator, $line);
-        $oppurtunity = new VolunteeringOppurtunity();
-        $oppurtunity->Id = $ArrayLine[0];
-        $oppurtunity->title = $ArrayLine[1];
-        $oppurtunity->volunteer = $ArrayLine[2];
-        $oppurtunity->location = $ArrayLine[3];
-        $oppurtunity->date = $ArrayLine[4];
-        return $oppurtunity;
+        
+        $this->Id = $ArrayLine[0];
+        $this->title = $ArrayLine[1];
+        $this->volunteer = $ArrayLine[2];
+        $this->location = $ArrayLine[3];
+        $this->date = $ArrayLine[4];
+        return $this;
     } 
     
-    function ListalloppDetails(){
+    function Listall(){
         $arr=[];
         $i=0;
         $file = fopen($this->EXmainobj->filename, "r+") or die("Unable to open file!");
@@ -34,7 +36,8 @@ class VolunteeringOppurtunity{
         $line = fgets($file);
         if (!empty(trim($line))) {
         $ArrayLine = explode($this->EXmainobj->separator, $line);
-       $arr[$i]=$this->getOppId($ArrayLine[0]);
+        $opp = new VolunteeringOppurtunity();
+       $arr[$i]=$opp->getById($ArrayLine[0]);
        $i++;
         }
     }
@@ -43,48 +46,32 @@ class VolunteeringOppurtunity{
     }
 
 
-    function InsertOpp()
+    function Insert($Data)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-        $Id = $_POST["Id"];
-        $title = $_POST["title"];
-        $volunteer = $_POST["volunteer"];
-        $location = $_POST["location"];
-        $date = $_POST["date"];
-
-        $lastId = $this->EXmainobj->getLastId($this->EXmainobj->filename,$this->EXmainobj->separator);
-        $id = $lastId + 1;
-        $OppInfo = "$Id~$title~$volunteer~$location~$date\n";
+   
         $file = fopen($this->EXmainobj->filename, "a+") or die("Unable to open file!");
 
-        fwrite($file, $OppInfo);
+        fwrite($file, $Data);
         fclose($file);
-        header("Location:VolunteeringOppurtunity.php");
+        header("Location:../View/VolunteeringOppurtunity.php");
 
         //$obj=new VolunteeringOppurtunity();
         //$obj->InsertOpp();
         
         exit();
        
-    }
+    
 }
-function handleOppEdit()
+function handleEdit($Data)
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $Id = $_POST["Id"];
-        $title = $_POST["title"];
-        $volunteer = $_POST["volunteer"];
-        $location = $_POST["location"];
-        $date = $_POST["date"];
-        // Read user data from file
+    
+        $Opp = explode($this->EXmainobj->separator, $Data);    
         $filename = $this->EXmainobj->filename;
         $file = file($filename);
-        // Iterate over each line in the file
         foreach ($file as $key => $line) {
             $OppData = explode($this->EXmainobj->separator, $line);
-            if ($OppData[0] == $Id) {
-                $file[$key] = "$Id~$title~$volunteer~$location~$date\n";
+            if ($OppData[0] == $Opp[0]) {
+                $file[$key] = $Data;
                 break;
             }
         }
@@ -93,9 +80,9 @@ function handleOppEdit()
             echo "Failed to save changes.";
             return;
         }
-        header("Location: VolunteeringOppurtunity.php");
+        header("Location:../View/VolunteeringOppurtunity.php");
         exit();
-    }
+    
 }
 /*function handleOppEdit()
 {
@@ -130,10 +117,10 @@ function handleOppEdit()
 }*/
 
 
-function deleteOpp($Id, $filename) {
+function delete($Id) {
     
         // Open the file in read mode
-        $file = fopen($filename, "r+") or die("Unable to open file!");
+        $file = fopen($this->EXmainobj->filename, "r+") or die("Unable to open file!");
     
         // Create a temporary file to store updated content
         $tempFile = fopen('temp.txt', 'w') or die("Unable to create temporary file!");
@@ -154,7 +141,7 @@ function deleteOpp($Id, $filename) {
         fclose($tempFile);
     
         // Replace the original file with the temporary file
-        rename('temp.txt', $filename);
+        rename('temp.txt', $this->EXmainobj->filename);
     
     
    /* // Read user data from file

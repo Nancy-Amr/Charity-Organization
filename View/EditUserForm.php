@@ -3,6 +3,8 @@
 <head>
     <title>Edit User Information</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    
 </head>
 <body>
     <h2>Edit User Information</h2>
@@ -12,15 +14,17 @@
 
     $obj=new User();
     $userT=new UserType();
+    $types=$userT->Listall();
     // Check if form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Call function to handle user edit
-       $obj-> handleUserEdit();
+    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //     // Call function to handle user edit
+    //    $obj-> handleUserEdit();
         
-        // Redirect to user page after editing
-        header("Location:user.php");
-        exit();
-    } else {
+    //     // Redirect to user page after editing
+    //     header("Location:user.php");
+    //     exit();
+    // } 
+    // else {
         // Retrieve user data if ID is provided
         if (isset($_GET['id']) && $_GET['id'] !== '') {
             $userId = $_GET['id'];
@@ -33,17 +37,24 @@
                 $userData = explode($obj->mainobj->separator, $line);
 
                 if (!empty($userData) && $userData[0] == $userId) {
-                    list($id, $username, $phone, $address, $email,$password) = $userData;
-                    $type=$userT->gettypebyID($userData[0]);
+                    list($id, $username, $phone, $address, $email,$password,$userTypeId) = $userData;
+                    // $type=$userT->gettypebyID($userData[0]);
     ?>             
-                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                    <form action="../Controllers/UserController.php?Command=Edit" method="POST">
                         <input type="hidden" name="id" value="<?php echo $id; ?>">
                         Username: <input type="text" name="Username" value="<?php echo $username; ?>"><br>
                         Phone: <input type="text" name="Phone" value="<?php echo $phone; ?>"><br>
                         Address: <input type="text" name="Address" value="<?php echo $address; ?>"><br>
                         Email: <input type="text" name="Email" value="<?php echo $email; ?>"><br>
                         Password: <input type="text" name="Password" value="<?php echo $password; ?>"><br>
-                        <?php echo "Type:  "."  <a href='EditTypeForm.php?action=edit&id={$type->id}'>$type->type</a>";?><br>
+                        User Type:
+                        <select name="UserType">
+                            <?php
+                            foreach ($types as $userType) {
+                                $selected = ($userType->id == $userTypeId) ? 'selected' : '';
+                                echo "<option value='" . $userType->id . "' $selected>" . $userType->type . "</option>";
+                            }
+                            ?>
                         <input type="submit" name="edit" value="Save Changes">
                     </form>
     <?php
@@ -54,7 +65,7 @@
         } else {
             echo "User ID not provided.";
         }
-    }
+    //}
     ?>
 </body>
 </html>

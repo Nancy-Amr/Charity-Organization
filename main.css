@@ -1,0 +1,30 @@
+/* General table styles */
+
+table {
+    border-collapse: collapse; /* Remove default table border spacing */
+    width: 100%; /* Make table full width by default */
+    margin: 0 auto; /* Center the table horizontally */
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd; /* Add a thin border to cells */
+    padding: 8px; /* Add some padding for better readability */
+    text-align: left; /* Align text to the left by default */
+  }
+  
+  th {
+    background-color: #f2f2f2; /* Light gray background for headers */
+    font-weight: bold; /* Make headers bolder */
+  }
+  
+  /* Optional styles for striped rows */
+  tr:nth-child(even) {
+    background-color: #f9f9f9; /* Add a light gray background to even rows */
+  }
+  
+  /* Optional styles for hover effects */
+  tr:hover {
+    background-color: #e9e9e9; /* Change background color on hover */
+  }
+  /* Style all buttons */
