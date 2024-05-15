@@ -17,11 +17,11 @@ form {
     width: 300px;
 }
 
-/* Add this CSS to registration.css */
+
 
 h2 {
     text-align: center;
-    margin-bottom: 20px; /* Add margin at the bottom to separate it from the form */
+    margin-bottom: 20px; 
 }
 
 
