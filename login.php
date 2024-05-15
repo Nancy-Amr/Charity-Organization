@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    
 
-    // Validate user credentials
+    
     
 }
 ?>
