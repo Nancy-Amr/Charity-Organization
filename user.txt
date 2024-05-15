@@ -4,3 +4,5 @@
 4~Menna Mohamed~01234256436~ElMoatam~mennaM@email.com~0000~3
 5~Rana~01245367245~Nasr City~Rana@email.com~0000~3
 6~Maged~01245367892~Helioplis~maged@email.com~0000~2
+7~ahmed~0112256489~31maadi~ahmed@gmail.com~5555~2
+8~amany~01236549~maadi~amany@yahoo.com~$2y$10$7WMF/kaUzTzb7.Oy6GULzO6qztEHG/9M0TXlZza3cq07UIkc6cM72~4

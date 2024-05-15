@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if (trim($userData[5]) == $password) {
                 
                     $flag = true;
+                    break;
             }
                   // Check if the password matches using password_verify(hashing)
              /*  if (password_verify($password, trim($userData[5]))) {
