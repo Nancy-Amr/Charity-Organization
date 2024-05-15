@@ -109,15 +109,19 @@ function Insert($Data)
     
 // }
 function Listall(){
-    $arr=array();
+    $arr=[];
     $i=0;
     $file = fopen($this->mainobj->filename, "r+") or die("Unable to open file!");
 while (!feof($file)) {
     $line = fgets($file);
+    if (!empty(trim($line))) {
     $ArrayLine = explode($this->mainobj->separator, $line);
-   $arr[$i]=getById($ArrayLine[0]);
+    $User = new User();
+   $arr[$i]=$User->getbyID($ArrayLine[0]);
    $i++;
+    }
 }
+
 fclose($file);
 return $arr;
 }

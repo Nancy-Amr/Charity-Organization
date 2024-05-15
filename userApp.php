@@ -3,14 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="userApp.css"> -->
     <title>Notification Button</title>
     
     <style>
+
         body {
             margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
         }
+
+        .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.block {
+    width: 60%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    position: relative; /* Add position relative to enable absolute positioning within */
+}
+
+.block:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.block h3 {
+    margin-top: 0;
+}
+
+.view-more {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.view-more a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.view-more a:hover {
+    background-color: #0056b3;
+}
+
 
         .notification-button {
             position: absolute;
@@ -36,6 +84,7 @@
             width: 30px;
             height: 30px;
         }
+
 
         .notification-list {
             position: absolute;
@@ -78,7 +127,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 320px;
-     
+
 
         }
 
@@ -90,8 +139,11 @@
             width: 200px;
             height: 60px;
             font-size: 20px;
-            margin: 200 10px; /* Adjust as needed */
+            margin: 200 10px; 
         }
+
+        
+
     </style>
 </head>
 <body>
@@ -148,13 +200,120 @@
             echo "Welcome, $userName!";
         }
         ?>
-    </div>
-    <div class="button-container">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-primary">Donate</button>
-            <button type="button" class="btn btn-primary">Volunteering Oppurtunities</button>
-            <button type="button" class="btn btn-primary">Volunteer</button>
+        <br>
+    <div class="container">
+        <div class="block">
+            <h3>Donations</h3>
+            <p>Description of Donations block.</p>
+            <div class="view-more">
+                <a href="donations.php">View More</a>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Volunteering Opportunities</h3>
+            <p>Description of Volunteering Opportunities block.</p>
+            <div class="view-more">
+                <a href="volunteering_opportunities.php">View More</a>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            height: 60%;
+        }
+
+        .block {
+            position: relative;
+            width: 23%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .block:hover {
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .block h3 {
+            margin-top: 0;
+        }
+
+        .view-more {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .view-more a {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .view-more a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block">
+            <h3>Donations</h3>
+            <p>Description of Donations block.</p>
+            <div class="view-more">
+                <a href="donations.php">View More</a>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Volunteering Opportunities</h3>
+            <p>Description of Volunteering Opportunities block.</p>
+            <div class="view-more">
+                <a href="volunteering_opportunities.php">View More</a>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Events</h3>
+            <p>Description of Events block.</p>
+            <div class="view-more">
+                <a href="events.php">View More</a>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Articles</h3>
+            <p>Description of Articles block.</p>
+            <div class="view-more">
+                <a href="articles.php">View More</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> --> 
