@@ -11,11 +11,7 @@
 <h1>Please insert your info:</h1>
 <form action="../Controllers/UserTypeController.php?Command=Add" method="POST">
 
-    <!-- <tr>
-      <td>ID:</td>
-      <td><input type="text" name="ID"></td>
-    </tr> -->
-
+ 
   <tr>
     <td>Type:</td>
     <td><input type="text" name="type"></td>

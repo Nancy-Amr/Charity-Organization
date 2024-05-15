@@ -10,17 +10,7 @@
     <?php
     include_once "../Models/VolunteeringOpp/VolunteeringOppClass.php";
     $obj=new VolunteeringOppurtunity();
-    // // Check if form is submitted
-    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //     // Call function to handle user edit
-    //     $obj->handleOppEdit();
-        
-    //     // Redirect to user page after editing
-    //     header("Location: VolunteeringOppurtunity.php");
-    //     exit();
-    // } 
-    // else {
-        // Retrieve user data if ID is provided
+   
         if (isset($_GET['id']) && $_GET['id'] !== '') {
             $OppId = $_GET['id'];
             $filename = $obj->EXmainobj->filename;
@@ -55,7 +45,6 @@
         } else {
             echo "Oppurtunity ID not provided.";
         }
-    // }
     ?>
 </body>
 </html>

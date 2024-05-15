@@ -19,16 +19,6 @@ class Donation{
         $this->Id = $ArrayLine[0];
         $this->date = $ArrayLine[1];
 
-        // $objDonDet= new DonationDetails();
-        // $alldet=[];
-        // $alldet=$objDonDet->ListallDonationDetails();
-        // for($i=0;$i<count($alldet);$i++){
-        //     if($alldet[$i]->Id==$donation->Id){
-        //     $DonDetails[$j]=$alldet[$i];
-        //     $j++;
-        // }
-
-        // }
         
         return $this;
     } 

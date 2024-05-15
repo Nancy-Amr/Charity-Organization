@@ -9,10 +9,7 @@ if ($Command=="Show"){
     $arr=$obj->Listall();
     return $arr;
 }
-// if($Command=="Add"){
-//     $new=new Donation();
-//     $new->InsertDonation($Donationinfo);
-// }
+
 }
    
 }

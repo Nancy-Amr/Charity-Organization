@@ -35,7 +35,6 @@ for($i=0;$i<count($arr);$i++){
     }
     echo "</tr>";
 }
-//"</td><td>".$arr[$i]->recipient."</td><td><a href=UserController.php?DonId=".$arr[$i]->Id.">".$arr[$i]->DonorId."</a>"</td><td>".$arr[$i]->feedback."</td></tr>";
 ?>
 
 </table>
