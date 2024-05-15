@@ -39,7 +39,6 @@ if (isset($_GET['Username'])) {
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
-      margin: 4px 2px;
       cursor: pointer;
       border-radius: 5px; /* Add rounded corners */
     }
@@ -47,6 +46,10 @@ if (isset($_GET['Username'])) {
     button:hover {
       background-color: #45A049; /* Darker green on hover */
     }
+    .button-container {
+           display: flex; 
+           justify-content: center;
+         }
 
     /* Optional styling for a more refined look */
     body {
@@ -62,9 +65,9 @@ if (isset($_GET['Username'])) {
   </style>
 </head>
 <body>
-
-<button type="button" onclick="window.location.href='View/user.php'" style="margin: 0 auto; margin-left: 525px">User Management</button>
-
+<div class="button-container">
+<button  onclick="window.location.href='View/user.php'" >User Management</button>
+  </div>
 </body>
 </html>
 

@@ -8,6 +8,12 @@ interface CRUDOperations{
     function Insert($Data);
     function handleEdit($Data);
 }
+interface CalculateZakat{
+    function getAmount();
+    function viewGoldPrices();
+    function ClacGoldZakat();
+    function calcPropertyZakat();
+    }
 class Main{
     public $filename;
     public $separator;

@@ -1,8 +1,15 @@
 
 <?php
+session_start();
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    $errorMessage = "CSRF token validation failed";
+        header("Location: loginError.php?message=" . urlencode($errorMessage)); 
+    exit();
+}
 
 
-
+// include_once "main.css";
+require_once("main.css");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     //$id = $_POST["id"];
@@ -12,22 +19,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file = file($filename);
     $flag = false;
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errorMessage = "Invalid email format. Please enter a valid email address.";
+        header("Location: loginError.php?message=" . urlencode($errorMessage)); 
+        exit();
+    }
     
     foreach ($file as $line) {
         $userData = explode("~", $line);
 
         if (isset($userData) && !empty($userData)) {
-            // Access userData elements here
             if ($userData[4] == $email) {
         
                 if ($userData[4] == $email) {
-            // Check if the password matches
                     if (trim($userData[5]) == $password) {
                 
                     $flag = true;
                     break;
             }
-                  // Check if the password matches using password_verify(hashing)
              /*  if (password_verify($password, trim($userData[5]))) {
                     $flag = true;
                 }
@@ -47,7 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     else{
-        echo "Invalid ID or password. Please try again.";
+        $errorMessage= "Invalid ID or password. Please try again.";
+        header("Location: loginError.php?message=" . urlencode($errorMessage));
+        exit();
     }
     
 
