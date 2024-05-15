@@ -1,7 +1,7 @@
 <?php
 
 include_once"Models/Donation/DonationClass.php";
-include_once"Models/DonationType/DonationTypeClass.php";
+
 
 class StaffMember{
 public $E_ID;
@@ -75,9 +75,7 @@ class ClothesManager extends Manager{
  
  }
 
- class clothes extends DonationType{}
- class cash extends DonationType{}
- 
+
   class Event {
     public $name;
     public $date;
