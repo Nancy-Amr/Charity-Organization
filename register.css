@@ -17,9 +17,13 @@ form {
     width: 300px;
 }
 
+
+
 h2 {
     text-align: center;
+    margin: 20px; 
 }
+
 
 label, input {
     display: block;
