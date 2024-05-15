@@ -206,7 +206,7 @@
             <h3>Donations</h3>
             <p>Description of Donations block.</p>
             <div class="view-more">
-                <a href="donations.php">View More</a>
+                <a href="donateview.php">View More</a>
             </div>
         </div>
         <div class="block">
