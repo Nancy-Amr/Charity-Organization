@@ -121,8 +121,10 @@ while (!feof($file)) {
    $i++;
     }
 }
+
 fclose($file);
 return $arr;
+}
 function DrawTableFromFile()
 {
     $myfile = fopen($this->mainobj->filename, "r+") or die("unable to open file!");

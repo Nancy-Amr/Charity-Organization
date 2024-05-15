@@ -1,5 +1,8 @@
 
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include_once"../Models/User/UserClass.php";
 include_once"../View/UserView.php";
 include_once"../View/UserForm.php";
