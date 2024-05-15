@@ -216,20 +216,6 @@
                 <a href="volunteering_opportunities.php">View More</a>
             </div>
         </div>
-        <div class="block">
-            <h3>Events</h3>
-            <p>Description of Events block.</p>
-            <div class="view-more">
-                <a href="events.php">View More</a>
-            </div>
-        </div>
-        <div class="block">
-            <h3>Articles</h3>
-            <p>Description of Articles block.</p>
-            <div class="view-more">
-                <a href="articles.php">View More</a>
-            </div>
-        </div>
     </div>
 </body>
 </html>
