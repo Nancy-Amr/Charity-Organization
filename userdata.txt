@@ -27,17 +27,3 @@ Age: 20
 Message: to make the world a better place
 Field: حملة اطعام محتاج
 -----------------
-Name: ahmed 
-Email: ahmedayman_03334@yahoo.com
-Phone: 01122368936
-Age: 20
-Message: to make the world a better place
-Field: حملة اطعام محتاج
------------------
-Name: ahmed
-Email: ahmed@gamil.com
-Phone: 01122369356
-Age: 19
-Message: now better
-Field: حملة اطعام محتاج
------------------
