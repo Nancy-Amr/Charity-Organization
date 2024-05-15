@@ -15,18 +15,49 @@ $objView->showUser($user);
 
 if($Command=="Add"){
  
+    $objView= new GenerateUserForm();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $obj = new User();
-
+        
         $username = $_POST["Username"];
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
         $password = $_POST["Password"];
+        $confirmPassword = $_POST['ConfirmPassword'];
         $usertype = $_POST["UserType"];
         $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,"~");
         $id = $lastId + 1;
 
+        $validationResult = $objView->validateUsername($username);
+        $passwordValidationResult = $objView->validatePassword($password);
+        $PhonevalidationResult = $objView->validatePhoneNumber($phone);
+        if ($validationResult !== true) {
+            $_SESSION['formData'] = $_POST;
+            $_SESSION['errorMessage'] = $validationResult;
+            $objView->generateUserForm();
+            exit(); 
+        }
+       
+        if ($PhonevalidationResult !== true) {
+            $_SESSION['formData'] = $_POST;
+            $_SESSION['errorMessage'] = $PhonevalidationResult;
+            $objView->generateUserForm();
+            exit(); 
+        }
+        
+    if ($passwordValidationResult !== true) {
+        $_SESSION['errorMessage'] = $passwordValidationResult;
+        $_SESSION['formData'] = $_POST; 
+        $objView->generateUserForm();
+                exit();
+    }
+    if ($password !== $confirmPassword) {
+        $_SESSION['errorMessage'] = "Passwords do not match.";
+        $_SESSION['formData'] = $_POST; 
+        $objView->generateUserForm();
+        exit();
+    }
 
 // Hash the password
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
