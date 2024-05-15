@@ -19,15 +19,7 @@ class UserType implements CRUDOperations{
         $this->UTmainobj->separator="~";
     }
 
-    // function gettypebyID($id){
-    //     $line=$this->UTmainobj->getLineWithId($id,$this->UTmainobj->filename,$this->UTmainobj->separator);
-    //     $ArrayLine = explode($this->UTmainobj->separator, $line);
-    //     $Utype= new UserType();
-    //     $Utype->id = $ArrayLine[0];
-    //     $Utype->type = $ArrayLine[1];
-        
-    //     return $Utype;
-    // } 
+    
 
     function getbyID($id){
         $line = $this->UTmainobj->getLineWithId($id, $this->UTmainobj->filename, $this->UTmainobj->separator);
@@ -83,30 +75,7 @@ class UserType implements CRUDOperations{
 
     
 }
-// function handleTypeEdit()
-// {
-//     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//         $id = $_POST["id"];
-//         $type= $_POST["type"];
-//         $filename = $this->UTmainobj->filename;
-//         $file = file($filename);
 
-
-//         // Iterate over each line in the file
-//         foreach ($file as $key => $line) {
-//             $Types = explode("~", $line);
-//             if ($Types[0] == $id) {
-//                 $file[$key] = "$id~$type\n";
-//                 break;
-//             }
-//         }
-
-//         // Write updated user data back to file
-//         file_put_contents($filename, implode("", $file));
-//         $obj=new UserType();
-//         $obj->handleTypeEdit($id,$type);
-//     }
-// }
 function handleEdit($Data)
 {
     $UserT = explode($this->UTmainobj->separator, $Data);
