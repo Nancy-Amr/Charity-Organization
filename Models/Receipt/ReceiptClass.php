@@ -1,16 +1,25 @@
 <?php
-class Receipt {
+class Receipt implements ReceiptInterface {
+    private $template;
     private $details;
+    private $date;
 
-    public function __construct(array $details) {
+    public function __construct($template, $details, $date) {
+        $this->template = $template;
         $this->details = $details;
+        $this->date = $date;
     }
 
-    public function getDescription(): string {
-        return "Receipt: " . implode(", ", $this->details) . ".";
-    }
-
-    public function getDetails(): array {
-        return $this->details;
+    public function displayReceipt($donationDetails) {
+        // Generate the receipt content based on the provided details
+        $receiptContent = "Receipt Details:\n";
+        $receiptContent .= "Template: {$this->template}\n";
+        $receiptContent .= "Details: {$this->details}\n";
+        $receiptContent .= "Date: {$this->date}\n";
+        $receiptContent .= "Donation Details:\n";
+        $receiptContent .= $donationDetails;
+        
+        return $receiptContent;
     }
 }
+
