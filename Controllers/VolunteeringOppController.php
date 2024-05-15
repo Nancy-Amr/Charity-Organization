@@ -1,6 +1,7 @@
 
 <?php
 include_once"../Models/VolunteeringOpp/VolunteeringOppClass.php";
+include_once"../notify.php";
 
 $Command=$_GET["Command"];
 
@@ -19,6 +20,10 @@ if ($Command=="Add"){
         $id = $lastId + 1;
         $OppInfo = "$Id~$title~$volunteer~$location~$date\n";
         $obj->Insert($OppInfo);
+       $concatenatedData =" Id: ". $Id . ' | ' ." Title: ". $title . ' | ' ." Volunteer: ". $volunteer . ' | '. " Location: " . $location . ' | '." Date: " . $date;
+       $subject = new ConcreteSubject();
+        $obs = new ConcreteObserver("New Volunteer Opportunity has been added : ", $subject);
+        $subject->setState($concatenatedData);
     }
        
 }
