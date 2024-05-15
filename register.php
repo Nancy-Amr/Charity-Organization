@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
+    <meta charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" href="register.css">
 </head>
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="index.php"><button>Back to Home</button></a>
         </div>
     <?php else: ?>
-        <h2>Register</h2>
+        <h2>Register</h2> <br>
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" required><br>
