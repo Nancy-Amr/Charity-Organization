@@ -9,6 +9,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
 
    
 </head>
@@ -25,7 +26,7 @@ $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         <input type="submit" value="Login">
     </form>
     <div style="text-align: center; margin-top: 20px;">
-        <a href="register.php"><button>Register</button></a>
+        <a href="View/RegistrationPage.php"><button>Register</button></a>
     </div>
 </body>
 </html>
