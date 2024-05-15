@@ -213,7 +213,7 @@
             <h3>Volunteering Opportunities</h3>
             <p>Description of Volunteering Opportunities block.</p>
             <div class="view-more">
-                <a href="volunteering_opportunities.php">View More</a>
+                <a href="vo_inter.php">View More</a>
             </div>
         </div>
     </div>
