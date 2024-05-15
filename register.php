@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" href="registration.css">
 </head>
 <body>
     <?php if ($registration_success): ?>
