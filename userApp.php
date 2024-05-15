@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification Button</title>
+    
     <style>
         body {
             margin: 0;
@@ -72,6 +73,25 @@
             font-size: 1.5em;
             color: #333;
         }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 320px;
+     
+
+        }
+
+        .btn-group {
+            display: flex;
+        }
+
+        .btn {
+            width: 200px;
+            height: 60px;
+            font-size: 20px;
+            margin: 200 10px; /* Adjust as needed */
+        }
     </style>
 </head>
 <body>
@@ -128,6 +148,13 @@
             echo "Welcome, $userName!";
         }
         ?>
+    </div>
+    <div class="button-container">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary">Donate</button>
+            <button type="button" class="btn btn-primary">Volunteering Oppurtunities</button>
+            <button type="button" class="btn btn-primary">Volunteer</button>
+        </div>
     </div>
 </body>
 </html>
