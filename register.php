@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="index.php"><button>Back to Home</button></a>
         </div>
     <?php else: ?>
-        <h2>Register</h2> <br>
+        <h2>Register</h2> 
         <form method="post" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" required><br>
