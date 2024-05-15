@@ -20,20 +20,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Access userData elements here
             if ($userData[4] == $email) {
         
-               /* if ($userData[4] == $email) {
+                if ($userData[4] == $email) {
             // Check if the password matches
                     if (trim($userData[5]) == $password) {
                 
                     $flag = true;
-            }*/
+            }
                   // Check if the password matches using password_verify(hashing)
-               if (password_verify($password, trim($userData[5]))) {
+             /*  if (password_verify($password, trim($userData[5]))) {
                     $flag = true;
                 }
-            break; 
+            break; */
         }
         }
-// }
+}
     }
     if($flag){
         if ($userData[4] == "admin@email.com") {
