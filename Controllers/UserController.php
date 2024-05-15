@@ -1,5 +1,8 @@
 
 <?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include_once"../Models/User/UserClass.php";
 include_once"../View/UserView.php";
 include_once"../View/UserForm.php";
@@ -14,20 +17,49 @@ $objView->showUser($user);
 }
 
 if($Command=="Add"){
- 
+    $objView= new GenerateUserForm();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $obj = new User();
-
+        
         $username = $_POST["Username"];
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
         $password = $_POST["Password"];
+        $confirmPassword = $_POST['ConfirmPassword'];
         $usertype = $_POST["UserType"];
         $lastId = $obj->mainobj->getLastId($obj->mainobj->filename,"~");
         $id = $lastId + 1;
 
-
+        $validationResult = $objView->validateUsername($username);
+        $passwordValidationResult = $objView->validatePassword($password);
+        $PhonevalidationResult = $objView->validatePhoneNumber($phone);
+        if ($validationResult !== true) {
+            $_SESSION['formData'] = $_POST;
+            $_SESSION['errorMessage'] = $validationResult;
+            $objView->generateUserForm();
+            exit(); 
+        }
+       
+        if ($PhonevalidationResult !== true) {
+            $_SESSION['formData'] = $_POST;
+            $_SESSION['errorMessage'] = $PhonevalidationResult;
+            $objView->generateUserForm();
+            exit(); 
+        }
+        
+    if ($passwordValidationResult !== true) {
+        $_SESSION['errorMessage'] = $passwordValidationResult;
+        $_SESSION['formData'] = $_POST; 
+        $objView->generateUserForm();
+                exit();
+    }
+    if ($password !== $confirmPassword) {
+        $_SESSION['errorMessage'] = "Passwords do not match.";
+        $_SESSION['formData'] = $_POST; 
+        $objView->generateUserForm();
+        exit();
+    }
 // Hash the password
 //$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -35,8 +67,7 @@ if($Command=="Add"){
         $obj->Insert($UserInfo);
     }
     else{
-    $newobj= new GenerateUserForm();
-    $newobj->generateUserForm();
+    $objView->generateUserForm();
     }
 
 }
@@ -44,13 +75,37 @@ if($Command=="Add"){
 if($Command=="Edit"){
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $objView= new GenerateUserForm();
         $id = $_POST["id"];
         $username = $_POST["Username"];
         $phone = $_POST["Phone"];
         $address = $_POST["Address"];
         $email = $_POST["Email"];
         $password = $_POST["Password"];
+        $confirmPassword = $_POST['ConfirmPassword'];
         $usertype = $_POST["UserType"];
+        $passwordValidationResult = $objView->validatePassword($password);
+        $PhonevalidationResult = $objView->validatePhoneNumber($phone);
+        
+        if ($PhonevalidationResult !== true) {
+            $_SESSION['formData'] = $_POST;
+            $_SESSION['errorMessage'] = $PhonevalidationResult;
+            header("Location:../View/EditUserForm.php?action=edit&id={$id}");
+            exit; 
+        }
+        
+    if ($passwordValidationResult !== true) {
+        $_SESSION['errorMessage'] = $passwordValidationResult;
+        $_SESSION['formData'] = $_POST; 
+        header("Location:../View/EditUserForm.php?action=edit&id={$id}");
+        exit();
+    }
+    if ($password !== $confirmPassword) {
+        $_SESSION['errorMessage'] = "Passwords do not match.";
+        $_SESSION['formData'] = $_POST; 
+        header("Location:../View/EditUserForm.php?action=edit&id={$id}");
+        exit();
+    }
 /*
 // Check if the password field is not empty
 if (!empty($password)) {

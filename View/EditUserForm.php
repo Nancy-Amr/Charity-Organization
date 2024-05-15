@@ -11,7 +11,13 @@
     <?php
     include_once "../Models/UserType/UserTypeClass.php";
     include_once "../Models/User/UserClass.php";
-
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $formData = isset($_SESSION['formData']) ? $_SESSION['formData'] : array();
+    $errorMessage = isset($_SESSION['errorMessage']) ? $_SESSION['errorMessage'] : "";
+    unset($_SESSION['formData']);
+    unset($_SESSION['errorMessage']);
     $obj=new User();
     $userT=new UserType();
     $types=$userT->Listall();
@@ -46,7 +52,8 @@
                         Phone: <input type="text" name="Phone" value="<?php echo $phone; ?>"><br>
                         Address: <input type="text" name="Address" value="<?php echo $address; ?>"><br>
                         Email: <input type="text" name="Email" value="<?php echo $email; ?>"><br>
-                        Password: <input type="text" name="Password" value="<?php echo $password; ?>"><br>
+                        Password: <input type="password" name="Password" value="<?php echo $password; ?>"><br>
+                        Confirm Password: <input type="password" name="ConfirmPassword" value="<?php echo $password; ?>"><br>
                         User Type:
                         <select name="UserType">
                             <?php
@@ -58,6 +65,9 @@
                         <input type="submit" name="edit" value="Save Changes">
                     </form>
     <?php
+    if (!empty($errorMessage)) {
+        echo '<p>' . $errorMessage . '</p>';
+    }
                     break;
                 }
             }
