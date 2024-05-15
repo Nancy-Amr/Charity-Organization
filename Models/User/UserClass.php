@@ -37,17 +37,18 @@ function handleEdit($Data)
         $file = file($filename);
 
 
-        // Iterate over each line in the file
+         // Iterate over each line in the file
         foreach ($file as $key => $line) {
             $userData = explode($this->mainobj->separator, $line);
             // Check if the ID matches
             if ($userData[0] == $User[0]) {
+                // Hash the password before updating user data
+                $User[5] = password_hash($User[5], PASSWORD_DEFAULT);
                 // Update user data
-                $file[$key] = $Data;
+                $file[$key] = implode($this->mainobj->separator, $User);
                 break;
             }
         }
-
         // Write updated user data back to file
         file_put_contents($filename, implode("", $file));
         header("Location:../View/user.php");
@@ -73,6 +74,10 @@ function delete($Id) {
 
 function Insert($Data)
 {
+     // Hash the password before inserting user data
+     $User = explode($this->mainobj->separator, $Data);
+     $User[5] = password_hash($User[5], PASSWORD_DEFAULT);
+     $Data = implode($this->mainobj->separator, $User);
     
         $file = fopen($this->mainobj->filename, "a+") or die("Unable to open file!");
         fwrite($file, $Data);
