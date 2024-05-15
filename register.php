@@ -60,9 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    
     <title>Register</title>
-    <link rel="stylesheet" href="C:\Users\menna\Desktop\Charity-Organization\registration.css">
+    <link rel="stylesheet" href="registration.css">
 </head>
 <body>
     <?php if ($registration_success): ?>
