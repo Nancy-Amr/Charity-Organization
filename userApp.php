@@ -14,49 +14,51 @@
             font-family: Arial, sans-serif;
         }
 
-        body {
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
         .container {
-            display: flex;
-            justify-content: space-between;
-            width: 90%;
-            height: 60%;
-        }
-        
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
 
-        .block:hover {
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
-        }
+.block {
+    width: 60%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+    position: relative; /* Add position relative to enable absolute positioning within */
+}
 
-        .block h3 {
-            margin-top: 0;
-        }
+.block:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
 
-        .view-more {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-        }
+.block h3 {
+    margin-top: 0;
+}
 
-        .view-more a {
-            background-color: #007bff;
-            color: #fff;
-            padding: 5px 10px;
-            text-decoration: none;
-            border-radius: 3px;
-        }
+.view-more {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
 
-        .view-more a:hover {
-            background-color: #0056b3;
-        }
+.view-more a {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.view-more a:hover {
+    background-color: #0056b3;
+}
+
 
         .notification-button {
             position: absolute;
